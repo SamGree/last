@@ -1,12 +1,13 @@
 import './App.css';
+import NavBar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      
-        <h1>hello every one</h1>
-      
-    </div>
+    <ThemeProvider>
+      <Router>
+      <NavBar />
+      </Router>
+    </ThemeProvider>
   );
 }
 
