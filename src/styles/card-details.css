@@ -1,0 +1,30 @@
+.post-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.post-image {
+    width: 100%;
+    object-fit: cover;
+}
+
+.dropdown-toggle-custom {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.like-container {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.download-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
