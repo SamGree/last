@@ -1,0 +1,13 @@
+.dropdown-toggle-icon {
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.dropdown-navbar {
+    text-align: center;
+}
+
+.logout-link {
+    cursor: pointer;
+    margin-left: 4px;
+}
