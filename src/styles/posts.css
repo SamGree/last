@@ -1,0 +1,28 @@
+.posts-form {
+    min-width: 600px;
+    max-width: 600px;
+    display: flex;
+    /* justify-content: center; */
+    justify-self: center;
+  }
+  
+  @media (max-width: 1024px) {
+    .posts-form {
+      min-width: 600px;
+      max-width: 600px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .posts-form {
+      min-width: 836px;
+      max-width: 836px;
+    }
+  }
+  @media (max-width: 768px) {
+    .posts-form {
+      min-width: 300px;
+      max-width: 300px;
+    }
+  }
+  

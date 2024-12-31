@@ -1,0 +1,15 @@
+.image-settings {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+@media (max-width: 480px) {
+    .title-settings {
+        text-align: center;
+    }
+
+    .save-button {
+        margin-bottom: 16px !important;
+    }
+}
