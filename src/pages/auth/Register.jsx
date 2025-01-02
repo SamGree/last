@@ -95,7 +95,7 @@ const Register = () => {
           formDataToSend.append("profile_image", formData.profile_image);
         }
 
-        await sendRequest("/users/register", "POST", {}, formDataToSend);
+        await sendRequest("/users/register/", "POST", {}, formDataToSend);
 
         toast.success("Registration is successful.");
         navigate("/login");

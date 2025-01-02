@@ -19,7 +19,7 @@ const Login = () => {
       try {
         if (username && password) {
           const data = await sendRequest(
-            "/users/login",
+            "/users/login/",
             "POST",
             { headers: { "Content-Type": "application/json" } },
             { username, password }
