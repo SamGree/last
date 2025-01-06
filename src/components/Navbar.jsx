@@ -15,7 +15,7 @@ const NavBar = () => {
   const { theme } = useTheme();
 
   const handleLogout = async () => {
-    await sendRequest("/users/logout", "POST", {
+    await sendRequest("/users/logout/", "POST", {
       headers: { Authorization: `Token ${token}` },
     });
     clearAuth();

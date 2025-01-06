@@ -17,7 +17,6 @@ import Albums from "./pages/album/Albums";
 import EditAlbum from "./pages/album/EditAlbum";
 import AlbumPosts from "./pages/album/AlbumPosts";
 import GlobalHelmet from "./components/GlobalHelmet";
-
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
