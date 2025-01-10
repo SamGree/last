@@ -24,8 +24,9 @@ const useDownloadImage = () => {
       if (!data) {
         throw new Error('Failed to fetch the image URL from the server.');
       }
+      console.log(data)
 
-      const secureUrl = data.downloadUrl.replace('http://', 'https://');
+      const secureUrl = data.download_url.replace('http://', 'https://');
 
       const imageResponse = await fetch(secureUrl, {
         method: 'GET',
@@ -47,7 +48,7 @@ const useDownloadImage = () => {
 
       const updatedPost = {
         ...postToUpdate,
-        downloadCount: data.downloadCount,
+        downloadCount: data.download_count,
       };
 
       const updatedPosts = posts.map((post) =>
