@@ -5,8 +5,6 @@ import PostList from './PostList';
 import { filteredPostsData } from '../../utils/helper-functions';
 import usePostStore from '../../store/post-store';
 
-
-
 import '../../styles/posts.css';
 
 const Posts = ({ title }) => {

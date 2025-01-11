@@ -1,15 +1,14 @@
-import { useNavigate, useParams } from "react-router-dom";
-import useHttpRequest from "../../hooks/http-request-hook";
-import useAuthStore from "../../store/auth-store";
-import useAlbums from "../../hooks/albums-hook";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { Button, Container, Form, Spinner } from "react-bootstrap";
-import CardDetails from "../../components/CardDetails";
-import CommentList from "../../components/CommentList";
-import CustomModal from "../../components/CustomModal";
-import usePostStore from "../../store/post-store";
-
+import { useEffect, useState } from 'react';
+import { Container, Form, Button, Spinner } from 'react-bootstrap';
+import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import useHttpRequest from '../../hooks/http-request-hook';
+import useAuthStore from '../../store/auth-store';
+import usePostStore from '../../store/post-store';
+//import CommentList from '../../components/CommentList';
+import CustomModal from '../../components/CustomModal';
+import CardDetails from '../../components/CardDetails';
+import useAlbums from '../../hooks/albums-hook';
 
 const PostDetails = () => {
   const { sendRequest } = useHttpRequest();
@@ -106,16 +105,6 @@ const PostDetails = () => {
     }
   };
 
-  console.log({
-  CommentList,
-  CustomModal,
-  CardDetails,
-  useHttpRequest,
-  useAuthStore,
-  usePostStore,
-  useAlbums,
-});
-
   const handleEdit = () => {
     navigate(`/posts/${postId}/edit`);
   };
@@ -209,8 +198,6 @@ const PostDetails = () => {
         </Button>
       </Form>
 
-      <CommentList />
-
       <CustomModal
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
@@ -223,4 +210,3 @@ const PostDetails = () => {
 };
 
 export default PostDetails;
-

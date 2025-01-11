@@ -6,7 +6,6 @@ import useHttpRequest from "../../hooks/http-request-hook";
 import useAuthStore from "../../store/auth-store";
 import usePostStore from "../../store/post-store";
 
-
 import "../../styles/edit-post.css";
 
 const EditPost = () => {
