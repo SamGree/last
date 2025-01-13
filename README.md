@@ -25,7 +25,7 @@
 | Page loads.  | x  |   |
 |  post feed has (hart ican,comment icon, and download ican). |x |   |
 | If you are not login, you will be able to see the posts only. | x | |
-| If you are login, you can like, comment, add,
+| If you are login, you can like, comment, add post and so on. | x | |
 | Click on hart icon(like the post)count is incremented +1 .  | x  |   |
 |  Click again on hart icon same post like count is decremented -1 . |  x |   |
 | Click on comment icon, it will take you to the post detail view.  | x  |   |
