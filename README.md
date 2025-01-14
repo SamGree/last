@@ -20,7 +20,7 @@ as they frequently log in to explore, download, and refine their private collect
 ------
 ------
 ## Manual test
- Navbar
+ ### Navbar
 |  Tasks |  Yes | No  |
 |---|---|---|
 |  Click on E-pics home page load. | x  |   |
@@ -33,14 +33,14 @@ as they frequently log in to explore, download, and refine their private collect
 |Hamburger icon after login shows(home, user name,logout, then inside arrow*add post, like posts, album, settings). | x |  |
 -------------
 -------------
-## Search field
+### Search field
 | Tasks  | Yes  |  No |
 |---|---|---|
 | Search bar is displayed on Home page,Liked posts page, and user posts page.  |  x |   |
 |I can search for image by Users name, title and tags. | x  |   |
 ----------
 ----------
-## Home Page
+### Home Page
 | Tasks  | Yes  |  No |
 |---|---|---|
 | Page loads.  | x  |   |
@@ -55,7 +55,7 @@ as they frequently log in to explore, download, and refine their private collect
 |pagination, I can choose to have 5, 10, or 20, posts in my home page.| x | |
 --------
 --------
-## Register
+### Register page
 
 | Tasks  | Yes  |  No |
 |---|---|---|
@@ -67,7 +67,7 @@ as they frequently log in to explore, download, and refine their private collect
 | click on Register, successful register you are taken to the sign in page.| x ||
 -------
 -------
-## Login
+### Login page
 | Tasks  | Yes  |  No |
 |---|---|---|
 |lick on Login, dispaly form for login page. | x ||
@@ -76,7 +76,7 @@ as they frequently log in to explore, download, and refine their private collect
 | After login, the user name displays in the navbar.| x||
 -------
 -------
-## Add Post
+### Add Post page
 | Tasks  | Yes  |  No |
 |---|---|---|
 | You should be logged in to access (add post). | x||
@@ -85,3 +85,13 @@ as they frequently log in to explore, download, and refine their private collect
 |Upload File-Image.| x ||
 |Submit, your post will be add to your page.| x ||
 |When the form is submitted there is a success toast notification| x ||
+------
+------
+### Albums 
+| Tasks  | Yes  |  No |
+|---|---|---|
+|You must be logged in to access the Albums page. | x ||
+|Navigate to the navbar, click the arrow dropdown, and select the Albums page to load it.| x ||
+|A form field will be displayed to name your album, along with a button to create it. | x ||
+|After creating an album, you can edit or delete it as needed. | x ||
+|For every action performed, the appropriate message will be displayed in the bottom-right corner.| x | |
