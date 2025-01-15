@@ -10,14 +10,31 @@ Additionally, you can connect with the community by leaving comments, giving lik
 ------------
 ## Table of Contents
 -------
-## User Profiles
-The casual user finds joy in browsing through captivating photos as a way to unwind and draw inspiration. They appreciate discovering fresh photography styles and occasionally download images for personal use. The convenience of saving their favorite photos into albums for easy access later is something they highly value.The amateur photographer enjoys sharing their work with others to gather feedback.
+## User Profiles 
+- The casual user finds joy in browsing through captivating photos as a way to unwind and draw inspiration. They appreciate discovering fresh photography styles and occasionally download images for personal use. The convenience of saving their favorite photos into albums for easy access later is something they highly value.The amateur photographer enjoys sharing their work with others to gather feedback.
 They find satisfaction in observing how their creations are received and take pride in contributing to a creative community. The platform makes it simple for them to upload their work and gain exposure.
 Being able to organize their own content and explore others' creations in albums is a significant perk.
 The enthusiast loves collecting and organizing photos. They take pleasure in curating their collections,
 showcasing them to family and friends. A seamless process for adding albums and posts is essential,
 as they frequently log in to explore, download, and refine their private collections.
 ------
+### User Goals
+- The Casual User
+These users want to discover new photography styles and trends.
+They enjoy scrolling as a relaxing activity.
+The Amateur Photographer
+This group uses the platform to share their photos and connect with the community.They appreciate feedback through likes, comments, and download counts.The platform helps them gain exposure for their work. The Enthusiast
+Enthusiasts love finding and collecting beautiful images.
+They take pride in curating albums of amazing pieces.
+Website Owner Goals The owner’s goal is to increase website traffic.More users mean they can add features to improve the experience for current users and attract new ones.
+This could lead to more ad revenue and potential subscription options.
+New features must be carefully chosen to keep existing users happy.
+The site needs to work well on both mobile and larger screens for easy use.
+------
+------
+## Design 
+
+### Wireframes
 ------
 ## Manual test
  ### Navbar
