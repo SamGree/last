@@ -31,6 +31,53 @@ This could lead to more ad revenue and potential subscription options.
 New features must be carefully chosen to keep existing users happy.
 The site needs to work well on both mobile and larger screens for easy use.
 ------
+## Features
+### Home Page
+- E-Pics Branding: Displays the application title prominently at the top for clear identification.
+- Navigation Bar:
+Includes options to navigate to the Home, Login, and Register pages for quick access.
+- Search Functionality:
+A search bar allows users to search posts by keywords like Users, Titles, or Tags for quick filtering and navigation.
+- Post Display Individual Post Card:
+Shows a large image preview of the post.
+Includes the title, Description or tag for the post.
+- Post Actions: Like Button: Allows users to like a post, with a heart icon and the count of likes displayed.
+- Comment Button: Enables users to comment on the post, with the count of comments displayed.
+- Download Button: Provides an option to download the post content, with the download count displayed and valid date is associated with the post.
+- Pagination: Pagination controls allow users to navigate through posts, displaying items per page (default is 5).
+- Navigation includes:
+  - Items per page dropdown.
+  - Buttons for "First", "Previous", "Next", and "Last" pages.
+
+
+### Add Post Page
+- Home Button: Quickly returns to the main dashboard.
+- Navigation Menu.
+  - Dropdown menu next to the user’s name.
+    - Add Post, Liked Posts, Albums, Settings.
+- Form for Adding New Posts.
+  - Title Input Field:
+    - Placeholder: "Enter post title."
+    - Placeholder: "Enter post description."
+    - Placeholder: "Enter tags"
+    - Users can upload a file or image related to their post.
+Includes a "Choose File" button for selecting the file.
+Displays "No file chosen" by default when no file has been uploaded.
+    - A Submit button with a visually distinct style (purple).
+### Albums Page
+Page Description:
+- Provides a clear explanation of the functionality: "Here you can create albums, add images to them, and view your albums sorted with your favorite photos."
+
+Create New Album:
+- Users can input a title for their new album.
+- Create Button:
+A visually distinct purple button to create a new album.
+- Displays existing albums as separate cards.
+
+
+
+
+
 ------
 ## Design 
 
