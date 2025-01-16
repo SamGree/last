@@ -6,7 +6,9 @@
 The goal is to foster a vibrant sharing community where you can either contribute by uploading your photos or simply browse and appreciate the creations of others.
 
 Additionally, you can connect with the community by leaving comments, giving likes, or organizing your favorite posts into private albums for easy access.
-
+------
+![image](/readme.img/)
+------
 ------------
 ## Table of Contents
 -------
@@ -74,7 +76,24 @@ Create New Album:
 A visually distinct purple button to create a new album.
 - Displays existing albums as separate cards.
 
-
+### Settings Page
+- Username Field:
+   - Displays the current username of the user.
+   - Allows editing to update the username.
+- Biography Field:
+   - Text area for users to input or edit their biography.
+- Avatar Upload:
+   - Provides an option to upload a profile picture (avatar).
+   - Includes a "Choose File" button for selecting an image file.
+   - Displays "No file chosen" by default when no file is uploaded.
+- Theme Settings:
+   - Explains how the theme changes automatically based on the user’s local time:
+     - Dark mode: 6 AM to 6 PM.
+     - Light mode: Other times.
+- Theme Checkbox:
+  - Displays the current theme (e.g., "Current Theme: Light") with an optional checkbox to manage theme preferences.
+- Save Changes:
+  - Save Button: A prominent purple button labeled "Save Changes" to confirm and apply updates made to the profile or settings.       
 
 
 
