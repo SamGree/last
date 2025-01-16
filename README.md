@@ -7,7 +7,7 @@ The goal is to foster a vibrant sharing community where you can either contribut
 
 Additionally, you can connect with the community by leaving comments, giving likes, or organizing your favorite posts into private albums for easy access.
 ------
-![image](/readme.img/)
+![image](/readme.img/den-featured.avif)
 ------
 ------------
 ## Table of Contents
