@@ -85,7 +85,7 @@ const PostCard = ({ post, handleOnPostDetails, renderTooltip }) => {
               className='like-container'
             >
               <FaHeart className='text-danger me-1' />
-              <span>{post.likes_count}</span>
+              <span>{post.likesCount}</span>
             </div>
             <div
               className='comment-container'
@@ -102,7 +102,7 @@ const PostCard = ({ post, handleOnPostDetails, renderTooltip }) => {
               <span>{post.downloadCount}</span>
             </div>
           </div>
-          <span className='text-muted'>{formatDate(post.created_at)}</span>
+          <span className='text-muted'>{formatDate(post.createdAt)}</span>
         </div>
         {post.description && (
           <Card.Text className='mt-3'>{post.description}</Card.Text>

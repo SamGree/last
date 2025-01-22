@@ -15,6 +15,11 @@ const useDownloadImage = () => {
       toast.error('Post not found!');
       return;
     }
+    
+    if (!postToUpdate.image) {
+      toast.error('image not found!');
+      return;
+    }
 
     try {
       const data = await sendRequest(`/posts/${postId}/download`, 'GET', {

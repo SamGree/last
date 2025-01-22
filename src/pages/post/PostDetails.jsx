@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Container, Form, Button, Spinner } from 'react-bootstrap';
-import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import useHttpRequest from '../../hooks/http-request-hook';
-import useAuthStore from '../../store/auth-store';
-import usePostStore from '../../store/post-store';
-//import CommentList from '../../components/CommentList';
-import CustomModal from '../../components/CustomModal';
-import CardDetails from '../../components/CardDetails';
-import useAlbums from '../../hooks/albums-hook';
+import { useNavigate, useParams } from "react-router-dom";
+import useHttpRequest from "../../hooks/http-request-hook";
+import useAuthStore from "../../store/auth-store";
+import useAlbums from "../../hooks/albums-hook";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { Button, Container, Form, Spinner } from "react-bootstrap";
+import CardDetails from "../../components/CardDetails";
+import CommentList from "../../components/CommentList";
+import CustomModal from "../../components/CustomModal";
+import usePostStore from "../../store/post-store";
+
 
 const PostDetails = () => {
   const { sendRequest } = useHttpRequest();
@@ -26,6 +27,7 @@ const PostDetails = () => {
     deletePost,
   } = usePostStore();
   const { albums } = useAlbums();
+  console.log('albums ', albums);
   const existingPost = posts.find((post) => post.id === postId);
 
   const [comment, setComment] = useState('');
@@ -105,6 +107,16 @@ const PostDetails = () => {
     }
   };
 
+  console.log({
+  CommentList,
+  CustomModal,
+  CardDetails,
+  useHttpRequest,
+  useAuthStore,
+  usePostStore,
+  useAlbums,
+});
+
   const handleEdit = () => {
     navigate(`/posts/${postId}/edit`);
   };
@@ -148,18 +160,18 @@ const PostDetails = () => {
       <Form className='mb-3'>
         <Form.Group controlId='selectAlbum'>
           <Form.Label>Select Album</Form.Label>
-          <Form.Select
+          <select
             value={selectedAlbum}
             onChange={(e) => setSelectedAlbum(e.target.value)}
             disabled={loading}
           >
-            <option value=''>Choose an album</option>
-            {albums.map((album) => (
-              <option key={album.id} value={album.id}>
+              <option value=''>Choose an album</option>
+            {albums?.length && albums.map((album) => (
+              <option key={album.id} value={`${album.id}`}>
                 {album.name}
               </option>
             ))}
-          </Form.Select>
+          </select>
         </Form.Group>
         <Button
           variant='primary'
@@ -198,6 +210,8 @@ const PostDetails = () => {
         </Button>
       </Form>
 
+      <CommentList />
+
       <CustomModal
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
@@ -210,3 +224,4 @@ const PostDetails = () => {
 };
 
 export default PostDetails;
+

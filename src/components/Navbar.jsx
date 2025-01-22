@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Navbar, Nav, Container, Dropdown } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import useTheme from "../hooks/theme-hook";
 import useAuthStore from "../store/auth-store";
 import useHttpRequest from "../hooks/http-request-hook";
@@ -28,7 +28,9 @@ const NavBar = () => {
   return (
     <Navbar bg={theme} variant={theme} expand="lg">
       <Container>
-        <Navbar.Brand href="/">E-Pics</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/"  style={{textDecoration: 'none', color:'#fff'}}>E-Pics</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
