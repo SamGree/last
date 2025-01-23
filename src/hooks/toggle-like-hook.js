@@ -13,160 +13,115 @@ const useToggleLike = () => {
     setPosts,
     updatePosts,
     setPost,
-    updatePost,
     updateComments,
   } = usePostStore();
 
+  const getCsrfToken = () => {
+    const csrfCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='));
+    return csrfCookie ? csrfCookie.split('=')[1] : null;
+  };
+  const csrfToken = getCsrfToken();
   const toggleLike = async (postId, commentId = null) => {
     try {
       if (commentId) {
+        // Handle comment likes
         const comments = getCommentsByPostId(postId);
-        const commentToUpdate = comments.find(
-          (comment) => comment.id === commentId
-        );
-
+        const commentToUpdate = comments.find((comment) => comment.id === commentId);
+      
         if (!commentToUpdate) {
-          toast.error('Comment not found!');
-          return;
+          console.warn('Comment not found!');
+          return null;
         }
-
+      
+        // Prevent the user from liking their own comment
         if (commentToUpdate.author === user.username) {
-          toast.error('You cannot like your own comment.');
-          return;
+          console.warn('Cannot like your own comment.');
+          return null;
         }
-
-        const response = await sendRequest(
-          `/comment-like/${commentId}`,
-          'POST',
-          {
+      
+        try {
+          // Send request to toggle like for the comment
+          const response = await sendRequest(`/comment-like/${commentId}`, 'POST', {
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Token ${token}`,
+              'X-CSRFToken': csrfToken,
             },
+          });
+      
+          // If the response is valid, update the comment in the state
+          if (response && typeof response.is_liked === 'boolean') {
+            const updatedComments = comments.map((comment) =>
+              comment.id === commentId
+                ? {
+                    ...comment,
+                    likesCount: response.likes_count ?? comment.likesCount,
+                    isLiked: response.is_liked ?? comment.isLiked, 
+                  }
+                : comment
+            );
+      
+            // Update the state with the modified comments
+            updateComments(updatedComments);
+      
+            return response;
+          } else {
+            console.error('Unexpected response for comment like:', response);
           }
-        );
-
-        let updatedComments = [];
-        if (response && response.message === 'Comment liked.') {
-          updatedComments = comments.map((comment) =>
-            comment.id === commentId
-              ? {
-                  ...comment,
-                  likesCount: comment.likesCount + 1,
-                  isLiked: true,
-                }
-              : comment
-          );
-          toast.success('Like successfully added to the comment.');
-        } else if (
-          response &&
-          response.message === 'Like removed from comment.'
-        ) {
-          updatedComments = comments.map((comment) =>
-            comment.id === commentId
-              ? {
-                  ...comment,
-                  likesCount: comment.likesCount - 1,
-                  isLiked: false,
-                }
-              : comment
-          );
-          toast.success('Like removed from the comment.');
+        } catch (error) {
+          console.error('Error liking comment:', error);
+          toast.error('An error occurred while liking the comment.');
         }
-
-        updateComments(updatedComments);
+        return null;
       } else {
+        // Handle post likes
         const postToUpdate = posts.find((post) => post.id === postId);
-        setPost(postToUpdate);
-
+      
         if (!postToUpdate) {
-          toast.error('Post not found!');
-          return;
+          console.warn('Post not found!');
+          return null;
         }
 
+        
         const response = await sendRequest(`/post-like/${postId}`, 'POST', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Token ${token}`,
+            'X-CSRFToken': csrfToken,
           },
         });
 
-        let updatedPosts = [];
-        let postUpdated = {};
-        if (response && response.message === 'Post liked.') {
-          updatedPosts = posts.map((post) =>
+        if (response && typeof response.is_liked === 'boolean') {
+          const updatedPosts = posts.map((post) =>
             post.id === postId
               ? {
                   ...post,
-                  likesCount: post.likesCount + 1,
-                  isLiked: true,
-                }
-              : post
-          );
-          postUpdated = {
-            ...postToUpdate,
-            likesCount: postToUpdate.likesCount + 1,
-            isLiked: true,
-          };
-          toast.success('Like successfully added to the post.');
-        } else if (response && response.message === 'Like removed from post.') {
-          updatedPosts = posts.map((post) =>
-            post.id === postId
-              ? {
-                  ...post,
-                  likesCount: post.likesCount - 1,
-                  isLiked: false,
+                  likesCount: response.likes_count,
+                  isLiked: response.is_liked,
                 }
               : post
           );
 
-          postUpdated = {
+          const postUpdated = {
             ...postToUpdate,
-            likesCount: postToUpdate.likesCount - 1,
-            isLiked: false,
+            likesCount: response.likes_count,
+            isLiked: response.is_liked,
           };
-          toast.success('Like removed from the post.');
+
+          updatePosts(updatedPosts);
+          setPost(postUpdated);
+
+          return response;
         }
 
-        updatePosts(updatedPosts);
-        updatePost(postUpdated);
+        console.error('Unexpected response for post like:', response);
+        return null;
       }
     } catch (error) {
-      if (commentId) {
-        const comments = getCommentsByPostId(postId);
-        const revertedComments = comments.map((comment) =>
-          comment.id === commentId
-            ? {
-                ...comment,
-                likesCount: comment.likesCount,
-                isLiked: comment.isLiked,
-              }
-            : comment
-        );
-
-        setComments(revertedComments);
-      } else {
-        const revertedPosts = posts.map((post) =>
-          post.id === postId
-            ? {
-                ...post,
-                likesCount: post.likesCount,
-                isLiked: post.isLiked,
-              }
-            : post
-        );
-        const revertedPost = posts.find((post) => post.id === postId);
-
-        setPost(revertedPost);
-        setPosts(revertedPosts);
-      }
-
-      if (error.response?.data?.error === 'You cannot like your own comment.') {
-        toast.error('You cannot like your own comment.');
-      }
-      if (error.response?.data?.detail === 'Invalid token.') {
-        toast.error('You have to login to be able to give a like!');
-      }
+      console.error('Error toggling like:', error);
+      return null;
     }
   };
 
@@ -174,3 +129,4 @@ const useToggleLike = () => {
 };
 
 export default useToggleLike;
+

@@ -55,7 +55,14 @@ const PostDetails = () => {
       fetchPost();
     }
   }, [sendRequest, postId, existingPost, setPostId, setComments, setPost]);
-
+  
+  const getCsrfToken = () => {
+    const csrfCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='));
+    return csrfCookie ? csrfCookie.split('=')[1] : null;
+  };
+  const csrfToken = getCsrfToken();
   const handleAddToAlbum = async () => {
     if (!selectedAlbum) {
       toast.error('Please select an album!');
@@ -67,6 +74,7 @@ const PostDetails = () => {
       await sendRequest(`/albums/${selectedAlbum}/add-post/${postId}`, 'POST', {
         headers: {
           Authorization: `Token ${token}`,
+          'X-CSRFToken': csrfToken,
         },
       });
 
@@ -91,6 +99,7 @@ const PostDetails = () => {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Token ${token}`,
+            'X-CSRFToken': csrfToken,
           },
         },
         { content: comment }
@@ -126,6 +135,7 @@ const PostDetails = () => {
       await sendRequest(`/posts/${postId}`, 'DELETE', {
         headers: {
           Authorization: `Token ${token}`,
+          'X-CSRFToken': csrfToken,
         },
       });
       removePost(postId);
@@ -224,4 +234,3 @@ const PostDetails = () => {
 };
 
 export default PostDetails;
-
