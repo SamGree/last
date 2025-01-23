@@ -42,6 +42,13 @@ const EditPost = () => {
     fetchPostDetails();
   }, [postId, sendRequest]);
 
+  const getCsrfToken = () => {
+    const csrfCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='));
+    return csrfCookie ? csrfCookie.split('=')[1] : null;
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -62,7 +69,7 @@ const EditPost = () => {
       toast.error("All fields are required!");
       return;
     }
-
+    const csrfToken = getCsrfToken();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -84,6 +91,7 @@ const EditPost = () => {
         {
           headers: {
             Authorization: `Token ${token}`,
+            'X-CSRFToken': csrfToken,
           },
         },
         formData
