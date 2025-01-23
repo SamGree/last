@@ -22,7 +22,7 @@ const AddPost = () => {
   });
   const [preview, setPreview] = useState(null);
   const getCsrfToken = () => {
-    const csrfCookie = document.cookie
+  const csrfCookie = document.cookie
       .split('; ')
       .find((row) => row.startsWith('csrftoken='));
     return csrfCookie ? csrfCookie.split('=')[1] : null;
