@@ -1,27 +1,55 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Dropdown, OverlayTrigger, Spinner } from 'react-bootstrap';
 import { FaHeart, FaComment, FaDownload } from 'react-icons/fa';
 import { formatDate } from '../utils/helper-functions';
+import { toast } from 'react-toastify';
 import useDownloadImage from '../hooks/download-image-hook';
 import useToggleLike from '../hooks/toggle-like-hook';
 import useAuthStore from '../store/auth-store';
 
 import '../styles/post-card.css';
 
-const PostCard = ({ post, handleOnPostDetails, renderTooltip }) => {
+const PostCard = ({ 
+  post, 
+  handleOnPostDetails, 
+  renderTooltip = (props, author) => <div {...props}>{author}</div>
+}) => {
   const { downloadImage } = useDownloadImage();
   const { toggleLike } = useToggleLike();
   const { user } = useAuthStore();
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [updatedPost, setUpdatedPost] = useState(post);
 
-  console.log(post)
-  let username = '';
-  if (user) {
-    username = user.username;
-  }
+  const [isLiking, setIsLiking] = useState(false);
+
+  const username = user?.username || '';
+  useEffect(() => {
+    setUpdatedPost(post);
+  }, [post]);
 
   const handleOnToggleLike = async (id) => {
-    toggleLike(id);
+    if (isLiking) return;
+    setIsLiking(true);
+  
+    try {
+      const response = await toggleLike(id);
+      if (response) {
+        setUpdatedPost({
+          ...updatedPost,
+          is_liked: response.is_liked,
+          likes_count: response.likes_count,
+        });
+  
+        const message = response.is_liked
+          ? 'Like successfully added to the post.'
+          : 'Like removed from the post.';
+        toast.success(message);
+      }
+    } catch (error) {
+      console.error('Error toggling like:', error);
+    } finally {
+      setIsLiking(false);
+    }
   };
 
   const handleImageLoad = () => {
@@ -29,34 +57,34 @@ const PostCard = ({ post, handleOnPostDetails, renderTooltip }) => {
   };
 
   return (
-    <Card className='shadow-sm'>
-      <Card.Header className='d-flex justify-content-between align-items-center'>
-        <span>{post.title}</span>
-        <div className='header-avatar-container'>
+    <Card className="shadow-sm">
+      <Card.Header className="d-flex justify-content-between align-items-center">
+        <span>{updatedPost.title}</span>
+        <div className="header-avatar-container">
           <OverlayTrigger
-            placement='top'
+            placement="top"
             delay={{ show: 250, hide: 400 }}
-            overlay={(props) => renderTooltip(props, post.author)}
+            overlay={(props) => renderTooltip(props, updatedPost.author)}
           >
-            <div className='d-flex align-items-center'>
+            <div className="d-flex align-items-center">
               <img
-                src={post.authorImage}
-                alt='avatar'
-                className='post-avatar'
+                src={updatedPost.author_image}
+                alt="avatar"
+                className="post-avatar"
               />
             </div>
           </OverlayTrigger>
-          {post.author === username && (
+          {updatedPost.author === username && (
             <Dropdown>
               <Dropdown.Toggle
-                variant='secondary'
-                id='dropdown-basic'
-                size='sm'
-                as='div'
-                className='dropdown-toggle-custom'
+                variant="secondary"
+                id="dropdown-basic"
+                size="sm"
+                as="div"
+                className="dropdown-toggle-custom"
               ></Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={() => handleOnPostDetails(post.id)}>
+                <Dropdown.Item onClick={() => handleOnPostDetails(updatedPost.id)}>
                   Go to details
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -64,48 +92,51 @@ const PostCard = ({ post, handleOnPostDetails, renderTooltip }) => {
           )}
         </div>
       </Card.Header>
-      <div className='image-container'>
+      <div className="image-container">
         {!imageLoaded && (
-          <div className='spinner-overlay'>
-            <Spinner animation='border' variant='primary' />
+          <div className="spinner-overlay">
+            <Spinner animation="border" variant="primary" />
           </div>
         )}
         <Card.Img
-          variant='top'
-          src={post.image}
+          variant="top"
+          src={updatedPost.image}
           className={`post-image ${imageLoaded ? 'visible' : 'hidden'}`}
           onLoad={handleImageLoad}
         />
       </div>
       <Card.Body>
-        <div className='d-flex justify-content-between align-items-center mb-3'>
-          <div className='d-flex align-items-center'>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <div className="d-flex align-items-center">
             <div
-              onClick={() => handleOnToggleLike(post.id)}
-              className='like-container'
+              onClick={() => handleOnToggleLike(updatedPost.id)}
+              className={`like-container ${isLiking ? 'disabled' : ''}`}
+              style={{ pointerEvents: isLiking ? 'none' : 'auto' }}
             >
-              <FaHeart className='text-danger me-1' />
-              <span>{post.likesCount}</span>
+              <FaHeart
+                className={`me-1 ${updatedPost.is_liked ? 'text-danger' : ''}`}
+              />
+              <span>{updatedPost.likes_count}</span>
             </div>
             <div
-              className='comment-container'
-              onClick={() => handleOnPostDetails(post.id)}
+              className="comment-container"
+              onClick={() => handleOnPostDetails(updatedPost.id)}
             >
-              <FaComment className='text-primary me-1' />
-              <span>{post.commentsCount}</span>
+              <FaComment className="text-primary me-1" />
+              <span>{updatedPost.comments_count}</span>
             </div>
             <div
-              onClick={() => downloadImage(post.id)}
-              className='download-container'
+              onClick={() => downloadImage(updatedPost.id)}
+              className="download-container"
             >
-              <FaDownload className='text-success me-1' />
-              <span>{post.downloadCount}</span>
+              <FaDownload className="text-success me-1" />
+              <span>{updatedPost.download_count}</span>
             </div>
           </div>
-          <span className='text-muted'>{formatDate(post.createdAt)}</span>
+          <span className="text-muted">{formatDate(updatedPost.created_at)}</span>
         </div>
-        {post.description && (
-          <Card.Text className='mt-3'>{post.description}</Card.Text>
+        {updatedPost.description && (
+          <Card.Text className="mt-3">{updatedPost.description}</Card.Text>
         )}
       </Card.Body>
     </Card>
