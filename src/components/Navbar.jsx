@@ -9,6 +9,12 @@ import useHttpRequest from "../hooks/http-request-hook";
 import "../styles/navbar.css";
 import { toast } from "react-toastify";
 
+const getCsrfToken = () => {
+  const csrfCookie = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('csrftoken='));
+  return csrfCookie ? csrfCookie.split('=')[1] : null;
+};
 const NavBar = () => {
   const { isAuthenticated, clearAuth, token, user } = useAuthStore();
   const { sendRequest } = useHttpRequest();
@@ -16,7 +22,7 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     await sendRequest("/users/logout/", "POST", {
-      headers: { Authorization: `Token ${token}` },
+      headers: { Authorization: `Token ${token}`, 'X-CSRFToken': getCsrfToken(), },
     });
     clearAuth();
     toast.success("Signout successful!");

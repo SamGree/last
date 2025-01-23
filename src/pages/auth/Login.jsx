@@ -11,6 +11,14 @@ const Login = () => {
   const { sendRequest } = useHttpRequest();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const getCsrfToken = () => {
+    const csrfCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("csrftoken="));
+    return csrfCookie ? csrfCookie.split("=")[1] : null;
+  };
+
+
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,10 +26,11 @@ const Login = () => {
     const loginUser = async () => {
       try {
         if (username && password) {
+          const csrfToken = getCsrfToken();
           const data = await sendRequest(
             "/users/login/",
             "POST",
-            { headers: { "Content-Type": "application/json" } },
+            { headers: { "Content-Type": "application/json","X-CSRFToken": csrfToken, } },
             { username, password }
           );
           setUser(data.user);

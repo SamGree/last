@@ -84,7 +84,7 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-
+  
     const registerUser = async () => {
       try {
         const formDataToSend = new FormData();
@@ -94,20 +94,27 @@ const Register = () => {
         if (formData.profile_image) {
           formDataToSend.append("profile_image", formData.profile_image);
         }
-
+  
+        // Call the API
         await sendRequest("/users/register/", "POST", {}, formDataToSend);
-
+  
         toast.success("Registration is successful.");
         navigate("/login");
       } catch (error) {
-        console.error("errr", error);
-        const errorMessage = error.response.data?.error;
-        toast.error(errorMessage ? errorMessage : "Error during login");
+        console.error("Error during registration:", error);
+        if (error.response) {
+          console.error("Server Response:", error.response.data);
+          const errorMessage = error.response.data?.error || "Invalid request data.";
+          toast.error(errorMessage);
+        } else {
+          toast.error("Network error or server unavailable.");
+        }
       }
     };
-
+  
     registerUser();
   };
+  
 
   return (
     <Container className="mt-5 max-w-400">
