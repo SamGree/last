@@ -21,7 +21,12 @@ const AddPost = () => {
     image: null,
   });
   const [preview, setPreview] = useState(null);
-
+  const getCsrfToken = () => {
+    const csrfCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='));
+    return csrfCookie ? csrfCookie.split('=')[1] : null;
+  };
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -76,7 +81,7 @@ const AddPost = () => {
       .filter((tag) => tag !== "");
 
     tagsData.forEach((tag) => formPayload.append("tags[]", tag));
-
+    const csrfToken = getCsrfToken();
     try {
       const data = await sendRequest(
         "/posts/",
@@ -84,6 +89,7 @@ const AddPost = () => {
         {
           headers: {
             Authorization: `Token ${token}`,
+            'X-CSRFToken': csrfToken,
           },
         },
         formPayload
