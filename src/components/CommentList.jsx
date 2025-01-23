@@ -21,13 +21,15 @@ const CommentList = () => {
 
   useEffect(() => {
     const fetchComments = async () => {
+      const csrfToken = getCsrfToken();
       try {
         setLoading(true);
         const data = await sendRequest(`/comments/post/${postId}`, 'GET', {
-          headers: { Authorization: `Token ${token}` },
+          headers: { Authorization: `Token ${token}`, 'X-CSRFToken': csrfToken },
         });
         setComments(data);
       } catch (error) {
+        console.error("Error fetching comments:", error);
         setComments([]);
       } finally {
         setLoading(false);
@@ -37,8 +39,55 @@ const CommentList = () => {
     fetchComments();
   }, [postId, sendRequest, token, setComments]);
 
+  const getCsrfToken = () => {
+    const csrfCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='));
+    return csrfCookie ? csrfCookie.split('=')[1] : null;
+  };
+  const csrfToken = getCsrfToken();
+
   const handleOnToggleLike = async (postId, commentId) => {
-    toggleLike(postId, commentId);
+    try {
+      const csrfToken = getCsrfToken();
+      const response = await sendRequest(
+        `/comment-like/${commentId}`,
+        'POST',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
+            'X-CSRFToken': csrfToken,
+          },
+        }
+      );
+      if (response && response.error) {
+        toast.error(response.error);
+        return;
+      }
+      if (response && typeof response.is_liked === 'boolean') {
+        const updatedComments = comments.map((comment) =>
+          comment.id === commentId
+            ? {
+                ...comment,
+                is_liked: response.is_liked,
+                likes_count: response.likes_count,
+              }
+            : comment
+        );
+  
+        setComments(updatedComments);
+        const action = response.is_liked ? 'liked' : 'unliked';
+        toast.success(`You have ${action} the comment!`);
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        console.error('Error toggling like:', error);
+        toast.error('Error toggling like');
+      }
+    }
   };
 
   const handleEditComment = (commentId, currentContent) => {
@@ -55,6 +104,7 @@ const CommentList = () => {
         {
           headers: {
             Authorization: `Token ${token}`,
+            'X-CSRFToken': csrfToken,
           },
         },
         formData
@@ -82,6 +132,7 @@ const CommentList = () => {
       await sendRequest(`/comments/${commentId}`, 'DELETE', {
         headers: {
           Authorization: `Token ${token}`,
+          'X-CSRFToken': csrfToken,
         },
       });
 
@@ -96,41 +147,43 @@ const CommentList = () => {
 
   if (loading) {
     return (
-      <div className='d-flex justify-content-center align-items-center'>
-        <Spinner animation='border' variant='primary' />
+      <div className="d-flex justify-content-center align-items-center">
+        <Spinner animation="border" variant="primary" />
       </div>
     );
   }
 
   return (
-    <ListGroup className='mt-3 mb-3'>
+    <ListGroup className="mt-3 mb-3">
       {comments
         .slice()
         .reverse()
         .map((comment) => (
-          <ListGroup.Item key={comment.id} className='mb-3 p-3 shadow-sm'>
-            <div className='d-flex justify-content-between align-items-center'>
-              <div className='d-flex align-items-center'>
-                <div className='d-flex align-items-center'>
+          <ListGroup.Item key={comment.id} className="mb-3 p-3 shadow-sm">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center">
                   <img
-                    src={comment.authorImage}
-                    alt='avatar'
-                    className='comment-avatar'
+                    src={comment.author_image}
+                    alt="avatar"
+                    className="comment-avatar"
                   />
                   <strong>{comment.author}</strong>
                 </div>
-                <div className='d-flex ms-3'>
+                <div className="d-flex ms-3">
                   <div onClick={() => handleOnToggleLike(postId, comment.id)}>
-                    <FaHeart className='text-danger me-1' />
-                    <span>{comment.likesCount}</span>
+                    <FaHeart
+                      className={`me-1 ${comment.is_liked ? 'text-danger' : ''}`}
+                    />
+                    <span>{comment.likes_count ?? 0}</span>
                   </div>
                   {comment.author === user.username && (
-                    <Dropdown align='end'>
+                    <Dropdown align="end">
                       <Dropdown.Toggle
-                        variant='secondary'
-                        size='sm'
-                        className='ms-2'
-                        as='div'
+                        variant="secondary"
+                        size="sm"
+                        className="ms-2"
+                        as="div"
                       />
                       <Dropdown.Menu>
                         <Dropdown.Item
@@ -150,25 +203,25 @@ const CommentList = () => {
                   )}
                 </div>
               </div>
-              <div className='d-flex align-items-center'>
-                <span className='ms-3 text-muted'>
-                  {formatDate(comment.createdAt)}
+              <div className="d-flex align-items-center">
+                <span className="ms-3 text-muted">
+                  {formatDate(comment.created_at)}
                 </span>
               </div>
             </div>
-            <div className='mt-2'>
+            <div className="mt-2">
               {editingCommentId === comment.id ? (
                 <Form>
                   <Form.Control
-                    type='text'
+                    type="text"
                     value={editedContent}
                     onChange={(e) => setEditedContent(e.target.value)}
                   />
-                  <div className='mt-2'>
+                  <div className="mt-2">
                     <Button
-                      size='sm'
-                      variant='secondary'
-                      className='me-2'
+                      size="sm"
+                      variant="secondary"
+                      className="me-2"
                       onClick={() => {
                         setEditingCommentId(null);
                         setEditedContent('');
@@ -177,8 +230,8 @@ const CommentList = () => {
                       Cancel
                     </Button>
                     <Button
-                      size='sm'
-                      variant='primary'
+                      size="sm"
+                      variant="primary"
                       onClick={() => handleSaveEdit(comment.id)}
                     >
                       Save
