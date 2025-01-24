@@ -205,7 +205,7 @@ const CommentList = () => {
               </div>
               <div className="d-flex align-items-center">
                 <span className="ms-3 text-muted">
-                  {formatDate(comment.created_at)}
+                  {formatDate(comment.createdAt)}
                 </span>
               </div>
             </div>
