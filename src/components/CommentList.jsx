@@ -4,14 +4,14 @@ import { toast } from 'react-toastify';
 import { FaHeart } from 'react-icons/fa';
 import usePostStore from '../store/post-store';
 import useAuthStore from '../store/auth-store';
-import useToggleLike from '../hooks/toggle-like-hook';
+// import useToggleLike from '../hooks/toggle-like-hook';
 import useHttpRequest from '../hooks/http-request-hook';
 import { formatDate } from '../utils/helper-functions';
 
 import '../styles/comment-list.css';
 
 const CommentList = () => {
-  const { toggleLike } = useToggleLike();
+  // const { toggleLike } = useToggleLike();
   const { token, user } = useAuthStore();
   const { postId, setComments, comments } = usePostStore();
   const { sendRequest } = useHttpRequest();
@@ -205,7 +205,7 @@ const CommentList = () => {
               </div>
               <div className="d-flex align-items-center">
                 <span className="ms-3 text-muted">
-                  {formatDate(comment.createdAt)}
+                  {formatDate(comment.created_at)}
                 </span>
               </div>
             </div>

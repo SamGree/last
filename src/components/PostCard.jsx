@@ -55,6 +55,20 @@ const PostCard = ({
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
+  const handleDownload = async () => {
+      try {
+          const response = await downloadImage(updatedPost.id);
+          if (response && response.download_count){ 
+            await downloadImage(updatedPost.id)
+            setUpdatedPost((prev) =>({
+              ...prev,
+              download_count: response.download_count + 1,
+            }));
+          }
+        }catch (error){
+          toast.error("Failed to download the image. Please try again later!")
+        }
+    };
 
   return (
     <Card className="shadow-sm">
@@ -126,11 +140,11 @@ const PostCard = ({
               <span>{updatedPost.comments_count}</span>
             </div>
             <div
-              onClick={() => downloadImage(updatedPost.id)}
+              onClick={handleDownload}
               className="download-container"
             >
               <FaDownload className="text-success me-1" />
-              <span>{updatedPost.download_count}</span>
+              <span>{updatedPost.download_count ?? 0}</span>
             </div>
           </div>
           <span className="text-muted">{formatDate(updatedPost.created_at)}</span>

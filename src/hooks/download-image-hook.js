@@ -7,6 +7,12 @@ const useDownloadImage = () => {
   const { sendRequest } = useHttpRequest();
   const { token } = useAuthStore();
   const { posts, updatePosts, setPost, updatePost } = usePostStore();
+  const getCsrfToken = () => {
+    const csrfCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='));
+    return csrfCookie ? csrfCookie.split('=')[1] : null;
+  };
 
   const downloadImage = async (postId) => {
     const postToUpdate = posts.find((post) => post.id === postId);
@@ -23,24 +29,25 @@ const useDownloadImage = () => {
 
     try {
       const data = await sendRequest(`/posts/${postId}/download`, 'GET', {
-        headers: { Authorization: `Token ${token}` },
+        headers: { Authorization: `Token ${token}`,'X-CSRFToken': getCsrfToken(), },
       });
 
       if (!data) {
         throw new Error('Failed to fetch the image URL from the server.');
       }
       console.log(data)
-
+      if (data && data.download_url){
       const secureUrl = data.download_url.replace('http://', 'https://');
 
       const imageResponse = await fetch(secureUrl, {
         method: 'GET',
         mode: 'cors',
       });
-
+    
       if (!imageResponse.ok) {
         throw new Error('Failed to download the image from the given URL.');
       }
+    
 
       const blob = await imageResponse.blob();
       const blobUrl = URL.createObjectURL(blob);
@@ -53,7 +60,7 @@ const useDownloadImage = () => {
 
       const updatedPost = {
         ...postToUpdate,
-        downloadCount: data.download_count,
+        download_count: data.download_count,
       };
 
       const updatedPosts = posts.map((post) =>
@@ -63,18 +70,20 @@ const useDownloadImage = () => {
       updatePosts(updatedPosts);
       setPost(updatedPost);
       updatePost(updatedPost);
-
       toast.success('Image downloaded successfully.');
+    } else {
+        throw new Error('No Download URL returned from the server')
+       }
     } catch (error) {
       console.error('Error while downloading the image:', error);
 
-      const revertedPosts = posts.map((post) =>
-        post.id === postId ? postToUpdate : post
-      );
+      // const revertedPosts = posts.map((post) =>
+      //   post.id === postId ? postToUpdate : post
+      // );
 
-      updatePosts(revertedPosts);
-      setPost(postToUpdate);
-      updatePost(postToUpdate);
+      // updatePosts(revertedPosts);
+      // setPost(postToUpdate);
+      // updatePost(postToUpdate);
 
       toast.error('You have to be logged in in order to download image!');
     }

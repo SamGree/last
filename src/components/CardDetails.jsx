@@ -1,14 +1,17 @@
 import React, { useState, Fragment } from 'react';
 import { Card, Dropdown, Spinner } from 'react-bootstrap';
 import { FaHeart, FaDownload } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import useToggleLike from '../hooks/toggle-like-hook';
+import useDownloadImage from '../hooks/download-image-hook';
 import useAuthStore from '../store/auth-store';
 import { formatDate } from '../utils/helper-functions';
+import { toast } from 'react-toastify';
+
 
 
 const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
   const { toggleLike } = useToggleLike();
+  const { downloadImage } = useDownloadImage();
   const { user } = useAuthStore();
   const [imageLoading, setImageLoading] = useState(true);
   const [updatedPost, setUpdatedPost] = useState(post);
@@ -25,6 +28,19 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
       likes_count: updatedLikes,
     });
   };
+
+  const handleDownload = async () => {
+    try {
+
+      await downloadImage(updatedPost.id)
+      setUpdatedPost({
+        ...updatedPost,
+        download_count: updatedPost.download_count + 1,
+      });
+    }catch (error){
+      toast.error("Failed to download the image. Please try again later!")
+    }
+  }
 
   return (
     <Card className="shadow-sm">
@@ -84,9 +100,9 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
                 />
                 <span>{updatedPost.likes_count ?? 0}</span>
               </div>
-              <div className="download-container">
+              <div onClick={handleDownload} className="download-container">
                 <FaDownload className="text-success me-1" />
-                <span>{updatedPost.download_count}</span>
+                <span>{updatedPost.download_count ?? 0}</span>
               </div>
             </div>
             <span className="text-muted">{formatDate(updatedPost.created_at)}</span>
