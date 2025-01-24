@@ -89,7 +89,7 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
                 <span>{updatedPost.download_count}</span>
               </div>
             </div>
-            <span className="text-muted">{formatDate(updatedPost.createdAt)}</span>
+            <span className="text-muted">{formatDate(updatedPost.created_at)}</span>
           </div>
           {updatedPost.description && (
             <Card.Text className="mt-3">{updatedPost.description}</Card.Text>
