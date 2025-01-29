@@ -35,7 +35,7 @@ const NavBar = () => {
     <Navbar bg={theme} variant={theme} expand="lg">
       <Container>
         <Navbar.Brand>
-          <Link to="/"  style={{textDecoration: 'none', color:'#fff'}}>E-Pics</Link>
+          <Link to="/"  style={{textDecoration: 'none', color:'green'}}>E-Pics</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

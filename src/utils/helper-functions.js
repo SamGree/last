@@ -1,5 +1,31 @@
 import { parseISO, format } from 'date-fns';
+import useAuthStore from '../store/auth-store';  // ✅ Import auth store for authentication
 
+// ✅ Fetch posts with authentication
+export const fetchPosts = async () => {
+  try {
+    const authHeaders = useAuthStore.getState().getAuthHeaders(); // ✅ Get authentication headers
+
+    const response = await fetch('https://your-api.com/posts/', {
+      method: 'GET',
+      headers: {
+        ...authHeaders,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch posts: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    return [];
+  }
+};
+
+// ✅ Filter posts based on search term
 export const filteredPostsData = (posts, searchTerm) => {
   if (!Array.isArray(posts)) {
     return [];
@@ -26,6 +52,7 @@ export const filteredPostsData = (posts, searchTerm) => {
     );
 };
 
+// ✅ Format date safely
 export const formatDate = (dateString) => {
   try {
     if (!dateString || typeof dateString !== 'string') {
@@ -34,7 +61,6 @@ export const formatDate = (dateString) => {
     }
 
     const dateObject = parseISO(dateString);
-
     return format(dateObject, 'yyyy-MM-dd');
   } catch (error) {
     console.error('Error parsing date string:', error);

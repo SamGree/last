@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'; 
 import {
   Container,
   Form,
@@ -25,12 +25,21 @@ const Albums = () => {
   const { token } = useAuthStore();
   const { addAlbum, removeAlbum } = useAlbumStore();
   const navigate = useNavigate();
-  const [newAlbumTitle, setNewAlbumTitle] = useState('New Title');
+  const [newAlbumTitle, setNewAlbumTitle] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleCreateAlbum = async () => {
     if (!newAlbumTitle.trim()) {
       toast.error('Album title is required!');
+      return;
+    }
+
+    //  Check if the album name already exists
+    const existingAlbum = albums.find(
+      (album) => album.name.toLowerCase() === newAlbumTitle.toLowerCase()
+    );
+    if (existingAlbum) {
+      toast.error('Album already exists!'); // Show error message
       return;
     }
 
@@ -48,6 +57,7 @@ const Albums = () => {
         },
         { name: newAlbumTitle }
       );
+
       addAlbum(data);
       setNewAlbumTitle('');
       toast.success('Album created successfully!');
