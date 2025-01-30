@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import useDownloadImage from '../hooks/download-image-hook';
 import useToggleLike from '../hooks/toggle-like-hook';
 import useAuthStore from '../store/auth-store';
+import LikedPosts from '../utils/like-posts-store.js'
 
 import '../styles/post-card.css';
 
@@ -21,6 +22,9 @@ const PostCard = ({
   const [updatedPost, setUpdatedPost] = useState(post);
 
   const [isLiking, setIsLiking] = useState(false);
+
+  const LikedPost = LikedPosts();
+  console.log("LikedPost= ", LikedPost)
 
   const username = user?.username || '';
   useEffect(() => {
@@ -131,6 +135,7 @@ const PostCard = ({
             >
               <FaHeart
                 className={`me-1 ${updatedPost.is_liked ? 'text-danger' : ''}`}
+                style={{color: `${updatedPost.isLiked ? "red":"gray"}`}}
               />
               <span>{updatedPost.likes_count}</span>
             </div>

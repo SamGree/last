@@ -1,10 +1,10 @@
 import { parseISO, format } from 'date-fns';
-import useAuthStore from '../store/auth-store';  // ✅ Import auth store for authentication
+import useAuthStore from '../store/auth-store';  //Import auth store for authentication
 
-// ✅ Fetch posts with authentication
+//Fetch posts with authentication
 export const fetchPosts = async () => {
   try {
-    const authHeaders = useAuthStore.getState().getAuthHeaders(); // ✅ Get authentication headers
+    const authHeaders = useAuthStore.getState().getAuthHeaders(); // Get authentication headers
 
     const response = await fetch('https://your-api.com/posts/', {
       method: 'GET',
