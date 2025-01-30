@@ -24,7 +24,7 @@ const useAuthStore = create(
         localStorage.removeItem('authToken');  // Remove token on logout
       },
 
-      // ✅ New function: Get headers with Authorization token
+      // function: Get headers with Authorization token
       getAuthHeaders: () => {
         const token = get().token || localStorage.getItem('authToken');
         return token ? { Authorization: `Token ${token}` } : {};

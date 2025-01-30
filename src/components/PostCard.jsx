@@ -58,7 +58,9 @@ const PostCard = ({
   const handleDownload = async () => {
       try {
           const response = await downloadImage(updatedPost.id);
-          if (response && response.download_count){ 
+          console.log("response= ", response)
+          if(!response) return;
+          if (response && response.download_count){
             await downloadImage(updatedPost.id)
             setUpdatedPost((prev) =>({
               ...prev,

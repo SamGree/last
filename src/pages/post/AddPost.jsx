@@ -64,7 +64,6 @@ const AddPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!formData.title || !formData.description || !formData.image) {
       toast.error("Please fill in all required fields!");
       return;

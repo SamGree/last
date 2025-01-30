@@ -82,7 +82,7 @@ const Settings = () => {
             alt='User Avatar'
             roundedCircle
             className='image-settings'
-            onError={() => setAvatarPreview(noAvatar)} // Ako dođe do greške sa slikom
+            onError={() => setAvatarPreview(noAvatar)}
           />
         )}
       </div>

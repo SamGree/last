@@ -1,33 +1,19 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import CustomPagination from '../../components/CustomPagination';
 import PostList from './PostList';
 import { filteredPostsData } from '../../utils/helper-functions';
 import usePostStore from '../../store/post-store';
-import useAuthStore from '../../store/auth-store'; // ✅ Import auth store to get token
+//import useAuthStore from '../../store/auth-store'; 
 
 import '../../styles/posts.css';
 
-const Posts = ({ title }) => {
-  const { posts, fetchPosts } = usePostStore();  // ✅ Added fetchPosts()
-  const { getAuthHeaders } = useAuthStore();  // ✅ Fetch authentication headers
-
+const Posts = ({ title }) => { 
+  const { posts } = usePostStore();   
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  useEffect(() => {
-    const loadPosts = async () => {
-      try {
-        const authHeaders = getAuthHeaders(); // ✅ Use getAuthHeaders to prevent warning
-        await fetchPosts(authHeaders); // ✅ Pass authentication headers when fetching posts
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-
-    loadPosts();
-  }, [fetchPosts, getAuthHeaders]); // ✅ Include getAuthHeaders in dependency array
 
   const handlePageChange = useCallback((page) => {
     setCurrentPage(page);

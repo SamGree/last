@@ -8,7 +8,7 @@ import usePostStore from '../../store/post-store';
 const PostsLiked = () => {
   const { sendRequest } = useHttpRequest();
   const { token } = useAuthStore();
-  const { posts, setPosts } = usePostStore();
+  const { setPosts } = usePostStore();
 
   useEffect(() => {
     const fetchLikedPosts = async () => {
@@ -17,6 +17,8 @@ const PostsLiked = () => {
           headers: { Authorization: `Token ${token}` },
         });
         setPosts(data || []);
+        console.log("data= " ,data)
+
       } catch (error) {
         console.error(error);
         toast.error('Error while fetching liked posts!');
@@ -27,7 +29,7 @@ const PostsLiked = () => {
     fetchLikedPosts();
   }, [sendRequest, token, setPosts]);
 
-  return <Posts posts={posts} title='Liked Posts' />;
+  return <Posts  title='Liked Posts' />;
 };
 
 export default PostsLiked;

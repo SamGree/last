@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import useAuthStore from './auth-store';  // ✅ Import auth store to get token
-
+import useAuthStore from './auth-store';
 const usePostStore = create(
   persist(
     (set, get) => ({
@@ -10,12 +9,12 @@ const usePostStore = create(
       postId: null,
       post: null,
 
-      // ✅ Fetch posts from API (with authentication)
+      // Fetch posts from API (with authentication)
       fetchPosts: async () => {
         try {
-          const authHeaders = useAuthStore.getState().getAuthHeaders();  // Get auth token
+          const authHeaders = useAuthStore.getState().getAuthHeaders();
 
-          const response = await fetch('https://your-api.com/posts/', {
+          const response = await fetch('https://my-e-pics-d3d3d941434e.herokuapp.com/posts/', {
             method: 'GET',
             headers: {
               ...authHeaders,
@@ -34,12 +33,12 @@ const usePostStore = create(
         }
       },
 
-      // ✅ Create a new post
+      // Create a new post
       createPost: async (postData) => {
         try {
           const authHeaders = useAuthStore.getState().getAuthHeaders();
 
-          const response = await fetch('https://your-api.com/posts/', {
+          const response = await fetch('https://my-e-pics-d3d3d941434e.herokuapp.com/posts/', {
             method: 'POST',
             headers: {
               ...authHeaders,
@@ -61,12 +60,13 @@ const usePostStore = create(
         }
       },
 
-      // ✅ Delete a post
+      // Delete a post
       deletePost: async (postId) => {
         try {
           const authHeaders = useAuthStore.getState().getAuthHeaders();
 
-          const response = await fetch(`https://your-api.com/posts/${postId}/`, {
+          // const response = await fetch(`https://your-api.com/posts/${postId}/`, {
+            const response = await fetch(`https://my-e-pics-d3d3d941434e.herokuapp.com/posts/${postId}/`, {
             method: 'DELETE',
             headers: {
               ...authHeaders,

@@ -10,7 +10,7 @@ const PostList = ({ posts }) => {
   const renderTooltip = (props, username) => (
     <Tooltip {...props}>{username}</Tooltip>
   );
-  console.log(posts)
+  console.log("posts_",posts)
 
   const handleOnPostDetails = (postId) => {
     navigate(`/posts/${postId}`);

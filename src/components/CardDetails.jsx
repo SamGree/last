@@ -15,18 +15,46 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
   const { user } = useAuthStore();
   const [imageLoading, setImageLoading] = useState(true);
   const [updatedPost, setUpdatedPost] = useState(post);
+  const [isLiking, setIsLiking] = useState(false);
 
+
+  // const handleOnToggleLike = async (id) => {
+  //   toggleLike(id);
+  //   const updatedLikes = updatedPost.is_liked
+  //     ? updatedPost.likes_count - 1
+  //     : updatedPost.likes_count + 1;
+
+  //   setUpdatedPost({
+  //     ...updatedPost,
+  //     is_liked: !updatedPost.is_liked,
+  //     likes_count: updatedLikes,
+  //   });
+  // };
+
+  
   const handleOnToggleLike = async (id) => {
-    toggleLike(id);
-    const updatedLikes = updatedPost.is_liked
-      ? updatedPost.likes_count - 1
-      : updatedPost.likes_count + 1;
-
-    setUpdatedPost({
-      ...updatedPost,
-      is_liked: !updatedPost.is_liked,
-      likes_count: updatedLikes,
-    });
+    if (isLiking) return;
+    setIsLiking(true);
+  
+    try {
+      const response = await toggleLike(id);
+      if (response) {
+        setUpdatedPost({
+          ...updatedPost,
+          is_liked: response.is_liked,
+          likes_count: response.likes_count,
+        });
+  
+        const message = response.is_liked
+          ? 'Like successfully added to the post.'
+          : 'Like removed from the post.';
+        toast.success(message);
+      }
+    } catch (error) {
+      console.error('Error toggling like:', error);
+    } finally {
+      setIsLiking(false);
+    }
   };
 
   const handleDownload = async () => {
