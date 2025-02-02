@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import useHttpRequest from '../hooks/http-request-hook';
 import useAuthStore from '../store/auth-store';
 import usePostStore from '../store/post-store';
+import useLikedPostsStore from '../store/liked-post-store';
 
 const useToggleLike = () => {
   const { sendRequest } = useHttpRequest();
@@ -15,6 +16,7 @@ const useToggleLike = () => {
     setPost,
     updateComments,
   } = usePostStore();
+  const { likedPosts, setLikedPosts } = useLikedPostsStore();
 
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
@@ -88,7 +90,7 @@ const useToggleLike = () => {
         const response = await sendRequest(`/post-like/${postId}`, 'POST', {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Token ${token}`,
+            'Authorization': `Token ${token}`,
             'X-CSRFToken': csrfToken,
           },
         });
@@ -99,7 +101,9 @@ const useToggleLike = () => {
               ? {
                   ...post,
                   likesCount: response.likes_count,
+                  likes_count: response.likes_count,
                   isLiked: response.is_liked,
+                  is_liked: response.is_liked,
                 }
               : post
           );
@@ -107,8 +111,16 @@ const useToggleLike = () => {
           const postUpdated = {
             ...postToUpdate,
             likesCount: response.likes_count,
+            likes_count: response.likes_count,
             isLiked: response.is_liked,
+            is_liked: response.is_liked,
           };
+
+          if (  !response.is_liked ) {
+            setLikedPosts( likedPosts.filter( liked_Post => liked_Post.id != response.post_id) );
+          } else {
+            setLikedPosts( [...likedPosts, {...postUpdated, is_liked: response.is_liked, likes_count: response.likes_count}] );
+          }
 
           updatePosts(updatedPosts);
           setPost(postUpdated);
@@ -129,4 +141,3 @@ const useToggleLike = () => {
 };
 
 export default useToggleLike;
-

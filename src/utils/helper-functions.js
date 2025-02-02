@@ -6,7 +6,7 @@ export const fetchPosts = async () => {
   try {
     const authHeaders = useAuthStore.getState().getAuthHeaders(); // Get authentication headers
 
-    const response = await fetch('https://your-api.com/posts/', {
+    const response = await fetch('https://my-e-pics-d3d3d941434e.herokuapp.com/posts/', {
       method: 'GET',
       headers: {
         ...authHeaders,
@@ -25,7 +25,7 @@ export const fetchPosts = async () => {
   }
 };
 
-// ✅ Filter posts based on search term
+// Filter posts based on search term
 export const filteredPostsData = (posts, searchTerm) => {
   if (!Array.isArray(posts)) {
     return [];
@@ -52,7 +52,7 @@ export const filteredPostsData = (posts, searchTerm) => {
     );
 };
 
-// ✅ Format date safely
+// Format date
 export const formatDate = (dateString) => {
   try {
     if (!dateString || typeof dateString !== 'string') {

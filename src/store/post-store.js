@@ -65,7 +65,6 @@ const usePostStore = create(
         try {
           const authHeaders = useAuthStore.getState().getAuthHeaders();
 
-          // const response = await fetch(`https://your-api.com/posts/${postId}/`, {
             const response = await fetch(`https://my-e-pics-d3d3d941434e.herokuapp.com/posts/${postId}/`, {
             method: 'DELETE',
             headers: {

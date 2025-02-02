@@ -19,20 +19,20 @@ const Settings = () => {
     bio: user.bio || '',
   });
   const [avatarPreview, setAvatarPreview] = useState(user.profileImage || null);
-  const [loadingImage, setLoadingImage] = useState(false); // Dodato za praćenje stanja učitavanja
+  const [loadingImage, setLoadingImage] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
     if (name === 'profile_image' && files?.length > 0) {
       const file = files[0];
-      setLoadingImage(true); // Početak učitavanja slike
+      setLoadingImage(true);
       setFormData((prevData) => ({ ...prevData, [name]: file }));
 
       const reader = new FileReader();
       reader.onloadend = () => {
         setAvatarPreview(reader.result);
-        setLoadingImage(false); // Slika je učitana
+        setLoadingImage(false);
       };
       reader.readAsDataURL(file);
     } else {

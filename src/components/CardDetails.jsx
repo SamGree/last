@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { Card, Dropdown, Spinner } from 'react-bootstrap';
 import { FaHeart, FaDownload } from 'react-icons/fa';
 import useToggleLike from '../hooks/toggle-like-hook';
@@ -6,36 +6,34 @@ import useDownloadImage from '../hooks/download-image-hook';
 import useAuthStore from '../store/auth-store';
 import { formatDate } from '../utils/helper-functions';
 import { toast } from 'react-toastify';
+import useLikedPostsStore from '../store/liked-post-store';
 
 
 
 const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
   const { toggleLike } = useToggleLike();
   const { downloadImage } = useDownloadImage();
-  const { user } = useAuthStore();
+  const { user, isAuthenticated } = useAuthStore();
   const [imageLoading, setImageLoading] = useState(true);
   const [updatedPost, setUpdatedPost] = useState(post);
   const [isLiking, setIsLiking] = useState(false);
+  const { likedPosts } = useLikedPostsStore();
+
+  useEffect(() => { 
+    if ( likedPosts && likedPosts.length > 0 ) {
+      likedPosts.forEach( talal => {
+        if (talal.id == post.id) {
+          post.is_liked = true;
+          setUpdatedPost(post);
+        }
+      })
+    }
+  },[post])
 
 
-  // const handleOnToggleLike = async (id) => {
-  //   toggleLike(id);
-  //   const updatedLikes = updatedPost.is_liked
-  //     ? updatedPost.likes_count - 1
-  //     : updatedPost.likes_count + 1;
 
-  //   setUpdatedPost({
-  //     ...updatedPost,
-  //     is_liked: !updatedPost.is_liked,
-  //     likes_count: updatedLikes,
-  //   });
-  // };
-
-  
   const handleOnToggleLike = async (id) => {
-    if (isLiking) return;
     setIsLiking(true);
-  
     try {
       const response = await toggleLike(id);
       if (response) {
@@ -125,6 +123,9 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
               >
                 <FaHeart
                   className={`me-1 ${updatedPost.is_liked ? 'text-danger' : ''}`}
+                  style={{color: isAuthenticated 
+                    ? (updatedPost.is_liked ? 'red' : 'black')
+                    :'gray' }}
                 />
                 <span>{updatedPost.likes_count ?? 0}</span>
               </div>

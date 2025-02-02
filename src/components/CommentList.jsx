@@ -4,14 +4,12 @@ import { toast } from 'react-toastify';
 import { FaHeart } from 'react-icons/fa';
 import usePostStore from '../store/post-store';
 import useAuthStore from '../store/auth-store';
-// import useToggleLike from '../hooks/toggle-like-hook';
 import useHttpRequest from '../hooks/http-request-hook';
 import { formatDate } from '../utils/helper-functions';
 
 import '../styles/comment-list.css';
 
 const CommentList = () => {
-  // const { toggleLike } = useToggleLike();
   const { token, user } = useAuthStore();
   const { postId, setComments, comments } = usePostStore();
   const { sendRequest } = useHttpRequest();
@@ -28,6 +26,7 @@ const CommentList = () => {
           headers: { Authorization: `Token ${token}`, 'X-CSRFToken': csrfToken },
         });
         setComments(data);
+        console.log("comments: ", comments)
       } catch (error) {
         console.error("Error fetching comments:", error);
         setComments([]);

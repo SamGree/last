@@ -8,11 +8,11 @@ import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <StrictMode>
+  <StrictMode>
     <HelmetProvider>
       <App />
     </HelmetProvider>
-  // </StrictMode>
+  </StrictMode>
 );
 
 

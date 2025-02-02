@@ -6,25 +6,21 @@ import { toast } from 'react-toastify';
 import useDownloadImage from '../hooks/download-image-hook';
 import useToggleLike from '../hooks/toggle-like-hook';
 import useAuthStore from '../store/auth-store';
-import LikedPosts from '../utils/like-posts-store.js'
 
 import '../styles/post-card.css';
 
 const PostCard = ({ 
   post, 
   handleOnPostDetails, 
-  renderTooltip = (props, author) => <div {...props}>{author}</div>
+  renderTooltip
 }) => {
   const { downloadImage } = useDownloadImage();
   const { toggleLike } = useToggleLike();
-  const { user } = useAuthStore();
+  const { user, isAuthenticated } = useAuthStore();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [updatedPost, setUpdatedPost] = useState(post);
 
   const [isLiking, setIsLiking] = useState(false);
-
-  const LikedPost = LikedPosts();
-  console.log("LikedPost= ", LikedPost)
 
   const username = user?.username || '';
   useEffect(() => {
@@ -32,7 +28,6 @@ const PostCard = ({
   }, [post]);
 
   const handleOnToggleLike = async (id) => {
-    if (isLiking) return;
     setIsLiking(true);
   
     try {
@@ -135,7 +130,9 @@ const PostCard = ({
             >
               <FaHeart
                 className={`me-1 ${updatedPost.is_liked ? 'text-danger' : ''}`}
-                style={{color: `${updatedPost.isLiked ? "red":"gray"}`}}
+                style={{color: isAuthenticated 
+                  ? (updatedPost.is_liked ? 'red' : 'black')
+                  :'gray' }}
               />
               <span>{updatedPost.likes_count}</span>
             </div>

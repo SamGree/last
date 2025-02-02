@@ -9,6 +9,7 @@ import CardDetails from "../../components/CardDetails";
 import CommentList from "../../components/CommentList";
 import CustomModal from "../../components/CustomModal";
 import usePostStore from "../../store/post-store";
+import useLikedPostsStore from "../../store/liked-post-store";
 
 
 const PostDetails = () => {
@@ -27,17 +28,25 @@ const PostDetails = () => {
     deletePost,
   } = usePostStore();
   const { albums } = useAlbums();
-  console.log('albums ', albums);
-  const existingPost = posts.find((post) => post.id === postId);
-
   const [comment, setComment] = useState('');
   const [selectedAlbum, setSelectedAlbum] = useState('');
   const [loading, setLoading] = useState(false);
-  const [fetchingPost, setFetchingPost] = useState(!existingPost);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [fetchingPost, setFetchingPost] = useState(true);
+  const { likedPosts, setLikedPosts } = useLikedPostsStore();
+
+  useEffect(()=>{
+    posts.map((post) => {
+      console.log("post before ", post)
+      likedPosts && likedPosts.forEach( (likedPost) => {
+        if (likedPost.id === post.id)
+           {post.is_liked = true;}
+        })
+    })
+  },[posts, likedPosts])
+
 
   useEffect(() => {
-    if (!existingPost) {
       const fetchPost = async () => {
         try {
           const data = await sendRequest(`/posts/${postId}`);
@@ -53,8 +62,32 @@ const PostDetails = () => {
       };
 
       fetchPost();
-    }
-  }, [sendRequest, postId, existingPost, setPostId, setComments, setPost]);
+
+      const fetchLikedPost = async () => {
+        if ( !token ) return;
+
+        try {
+          const data = await sendRequest('/post-like/','GET',
+            {headers: {'Authorization': `Token ${token}`}},{}
+          );
+          setLikedPosts(data || []);
+
+          if ( data && data.length > 0 ) {
+            data.map(( liked_Post ) => {
+                if (liked_Post.id == postId)
+                  setPost(liked_Post);
+                  return;
+            })
+          };
+        } catch (error) {
+          console.log(error);
+          toast.error('Error while fetching post details!');
+        }
+      };
+
+      fetchLikedPost();
+    
+  }, [sendRequest, postId, token, setPostId, setComments, setPost, setLikedPosts]);
   
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
@@ -116,15 +149,7 @@ const PostDetails = () => {
     }
   };
 
-  console.log({
-  CommentList,
-  CustomModal,
-  CardDetails,
-  useHttpRequest,
-  useAuthStore,
-  usePostStore,
-  useAlbums,
-});
+
 
   const handleEdit = () => {
     navigate(`/posts/${postId}/edit`);

@@ -4,7 +4,6 @@ import CustomPagination from '../../components/CustomPagination';
 import PostList from './PostList';
 import { filteredPostsData } from '../../utils/helper-functions';
 import usePostStore from '../../store/post-store';
-//import useAuthStore from '../../store/auth-store'; 
 
 import '../../styles/posts.css';
 

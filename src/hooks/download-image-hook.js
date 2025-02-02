@@ -77,14 +77,6 @@ const useDownloadImage = () => {
     } catch (error) {
       console.error('Error while downloading the image:', error);
 
-      // const revertedPosts = posts.map((post) =>
-      //   post.id === postId ? postToUpdate : post
-      // );
-
-      // updatePosts(revertedPosts);
-      // setPost(postToUpdate);
-      // updatePost(postToUpdate);
-
       toast.error('You have to be logged in in order to download image!');
     }
   };

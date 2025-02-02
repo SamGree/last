@@ -1,16 +1,27 @@
 import { ListGroup, ListGroupItem, Container, Tooltip } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import PostCard from '../../components/PostCard';
+import { useEffect } from 'react';
+import useLikedPostsStore from '../../store/liked-post-store';
 
 import '../../styles/post-list.css';
 
 const PostList = ({ posts }) => {
   const navigate = useNavigate();
+  const { likedPosts } = useLikedPostsStore();
+
+  useEffect(()=>{
+    posts.map((post) => {
+      likedPosts && likedPosts.forEach( (likedPosts) => {
+        if (likedPosts.id === post.id)
+           {post.is_liked = true;}
+        })
+    })
+  },[posts])
 
   const renderTooltip = (props, username) => (
     <Tooltip {...props}>{username}</Tooltip>
   );
-  console.log("posts_",posts)
 
   const handleOnPostDetails = (postId) => {
     navigate(`/posts/${postId}`);
