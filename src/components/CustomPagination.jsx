@@ -1,6 +1,6 @@
-import { Pagination, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Pagination, Dropdown, DropdownButton } from "react-bootstrap";
 
-import '../styles/custom-pagination.css';
+import "../styles/custom-pagination.css";
 
 const CustomPagination = ({
   totalPages,
@@ -26,20 +26,20 @@ const CustomPagination = ({
   };
 
   return (
-    <div className='pagination-container'>
+    <div className="pagination-container">
       <DropdownButton
-        id='dropdown-items-per-page'
+        id="dropdown-items-per-page"
         title={`Items per page: ${itemsPerPage}`}
-        variant='secondary'
+        variant="secondary"
         onSelect={(eventKey) => handleItemsPerPageChange(Number(eventKey))}
-        className='dropdown-items-per-page'
+        className="dropdown-items-per-page"
       >
-        <Dropdown.Item eventKey='5'>5</Dropdown.Item>
-        <Dropdown.Item eventKey='10'>10</Dropdown.Item>
-        <Dropdown.Item eventKey='20'>20</Dropdown.Item>
+        <Dropdown.Item eventKey="5">5</Dropdown.Item>
+        <Dropdown.Item eventKey="10">10</Dropdown.Item>
+        <Dropdown.Item eventKey="20">20</Dropdown.Item>
       </DropdownButton>
 
-      <Pagination className='pagination-buttons'>
+      <Pagination className="pagination-buttons">
         <Pagination.First
           disabled={isFirstPage}
           onClick={() => handleClick(1)}

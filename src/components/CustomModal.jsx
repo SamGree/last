@@ -1,4 +1,4 @@
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button } from "react-bootstrap";
 
 const CustomModal = ({ show, onHide, title, body, onConfirm }) => {
   return (
@@ -8,10 +8,10 @@ const CustomModal = ({ show, onHide, title, body, onConfirm }) => {
       </Modal.Header>
       <Modal.Body>{body}</Modal.Body>
       <Modal.Footer>
-        <Button variant='secondary' onClick={onHide}>
+        <Button variant="secondary" onClick={onHide}>
           Cancel
         </Button>
-        <Button variant='danger' onClick={onConfirm}>
+        <Button variant="danger" onClick={onConfirm}>
           Confirm
         </Button>
       </Modal.Footer>

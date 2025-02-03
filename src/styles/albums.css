@@ -1,20 +1,20 @@
 .no-albums-placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
 
 .album-card {
-    height: 100px;
+  height: 100px;
 }
 
 .album-link {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .albums-dropdown-toggle-icon {
-    cursor: pointer;
-    display: flex;
-    justify-content: flex-end;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
 }

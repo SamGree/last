@@ -1,36 +1,36 @@
 .pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 16px;
-    gap: 16px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .dropdown-items-per-page {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .pagination-buttons {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 @media (max-width: 480px) {
-    .pagination-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
+  .pagination-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
-    .dropdown-items-per-page {
-        width: 100%;
-        margin-bottom: 0;
-        text-align: center;
-    }
+  .dropdown-items-per-page {
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+  }
 
-    .pagination-buttons {
-        justify-content: center;
-        width: 100%;
-        margin-bottom: 16px;
-    }
+  .pagination-buttons {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 16px;
+  }
 }

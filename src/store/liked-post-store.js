@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 const useLikedPostsStore = create(
   persist(
@@ -18,7 +18,10 @@ const useLikedPostsStore = create(
           likedPosts: Array.isArray(likedPosts)
             ? [
                 ...new Map(
-                  [...state.likedPosts, ...likedPosts].map((likedPost) => [likedPosts.id, likedPost])
+                  [...state.likedPosts, ...likedPosts].map((likedPost) => [
+                    likedPosts.id,
+                    likedPost,
+                  ])
                 ).values(),
               ]
             : [],
@@ -28,7 +31,10 @@ const useLikedPostsStore = create(
         set((state) => ({
           likedPosts: [
             ...new Map(
-              [likedPost, ...state.likedPosts].map((likedPost) => [likedPost.id, likedPost])
+              [likedPost, ...state.likedPosts].map((likedPost) => [
+                likedPost.id,
+                likedPost,
+              ])
             ).values(),
           ],
         }));
@@ -58,7 +64,6 @@ const useLikedPostsStore = create(
         }));
       },
 
-
       setPost: (likedPost) => {
         set(() => ({
           likedPost,
@@ -68,7 +73,8 @@ const useLikedPostsStore = create(
       updatePost: (updatedPost) => {
         set((state) => ({
           likedPost:
-            state.likedPost && String(state.likedPost.id) === String(updatedPost.id)
+            state.likedPost &&
+            String(state.likedPost.id) === String(updatedPost.id)
               ? { ...state.likedPost, ...updatedPost }
               : state.likedPost,
         }));
@@ -77,7 +83,7 @@ const useLikedPostsStore = create(
       deletePost: () => set(() => ({ likedPost: null })),
     }),
     {
-      name: 'like-post-storage',
+      name: "like-post-storage",
       getStorage: () => localStorage,
     }
   )

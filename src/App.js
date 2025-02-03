@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "./context/theme-context";
@@ -12,14 +12,13 @@ import AddPost from "./pages/post/AddPost";
 import EditPost from "./pages/post/EditPost";
 import PostsLiked from "./pages/post/PostsLiked";
 import Settings from "./pages/profile/Settings";
-
 import Albums from "./pages/album/Albums";
 import EditAlbum from "./pages/album/EditAlbum";
 import AlbumPosts from "./pages/album/AlbumPosts";
 import GlobalHelmet from "./components/GlobalHelmet";
 
 import "react-toastify/dist/ReactToastify.css";
-import PostDetails from './pages/post/PostDetails';
+import PostDetails from "./pages/post/PostDetails";
 
 function App() {
   return (

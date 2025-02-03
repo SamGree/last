@@ -1,14 +1,12 @@
-import React, { useState, Fragment, useEffect } from 'react';
-import { Card, Dropdown, Spinner } from 'react-bootstrap';
-import { FaHeart, FaDownload } from 'react-icons/fa';
-import useToggleLike from '../hooks/toggle-like-hook';
-import useDownloadImage from '../hooks/download-image-hook';
-import useAuthStore from '../store/auth-store';
-import { formatDate } from '../utils/helper-functions';
-import { toast } from 'react-toastify';
-import useLikedPostsStore from '../store/liked-post-store';
-
-
+import React, { useState, Fragment, useEffect } from "react";
+import { Card, Dropdown, Spinner } from "react-bootstrap";
+import { FaHeart, FaDownload } from "react-icons/fa";
+import useToggleLike from "../hooks/toggle-like-hook";
+import useDownloadImage from "../hooks/download-image-hook";
+import useAuthStore from "../store/auth-store";
+import { formatDate } from "../utils/helper-functions";
+import { toast } from "react-toastify";
+import useLikedPostsStore from "../store/liked-post-store";
 
 const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
   const { toggleLike } = useToggleLike();
@@ -19,18 +17,16 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
   const [isLiking, setIsLiking] = useState(false);
   const { likedPosts } = useLikedPostsStore();
 
-  useEffect(() => { 
-    if ( likedPosts && likedPosts.length > 0 ) {
-      likedPosts.forEach( talal => {
+  useEffect(() => {
+    if (likedPosts && likedPosts.length > 0) {
+      likedPosts.forEach((talal) => {
         if (talal.id == post.id) {
           post.is_liked = true;
           setUpdatedPost(post);
         }
-      })
+      });
     }
-  },[post])
-
-
+  }, [post]);
 
   const handleOnToggleLike = async (id) => {
     setIsLiking(true);
@@ -42,14 +38,14 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
           is_liked: response.is_liked,
           likes_count: response.likes_count,
         });
-  
+
         const message = response.is_liked
-          ? 'Like successfully added to the post.'
-          : 'Like removed from the post.';
+          ? "Like successfully added to the post."
+          : "Like removed from the post.";
         toast.success(message);
       }
     } catch (error) {
-      console.error('Error toggling like:', error);
+      console.error("Error toggling like:", error);
     } finally {
       setIsLiking(false);
     }
@@ -57,16 +53,15 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
 
   const handleDownload = async () => {
     try {
-
-      await downloadImage(updatedPost.id)
+      await downloadImage(updatedPost.id);
       setUpdatedPost({
         ...updatedPost,
         download_count: updatedPost.download_count + 1,
       });
-    }catch (error){
-      toast.error("Failed to download the image. Please try again later!")
+    } catch (error) {
+      toast.error("Failed to download the image. Please try again later!");
     }
-  }
+  };
 
   return (
     <Card className="shadow-sm">
@@ -101,7 +96,7 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
         {imageLoading && (
           <div
             className="d-flex justify-content-center align-items-center"
-            style={{ height: '300px' }}
+            style={{ height: "300px" }}
           >
             <Spinner animation="border" variant="primary" />
           </div>
@@ -112,7 +107,7 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
           className="post-image"
           onLoad={() => setImageLoading(false)}
           onError={() => setImageLoading(false)}
-          style={{ display: imageLoading ? 'none' : 'block' }}
+          style={{ display: imageLoading ? "none" : "block" }}
         />
         <Card.Body>
           <div className="d-flex justify-content-between align-items-center mb-3">
@@ -122,10 +117,16 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
                 className="like-container"
               >
                 <FaHeart
-                  className={`me-1 ${updatedPost.is_liked ? 'text-danger' : ''}`}
-                  style={{color: isAuthenticated 
-                    ? (updatedPost.is_liked ? 'red' : 'black')
-                    :'gray' }}
+                  className={`me-1 ${
+                    updatedPost.is_liked ? "text-danger" : ""
+                  }`}
+                  style={{
+                    color: isAuthenticated
+                      ? updatedPost.is_liked
+                        ? "red"
+                        : "black"
+                      : "gray",
+                  }}
                 />
                 <span>{updatedPost.likes_count ?? 0}</span>
               </div>
@@ -134,7 +135,9 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
                 <span>{updatedPost.download_count ?? 0}</span>
               </div>
             </div>
-            <span className="text-muted">{formatDate(updatedPost.created_at)}</span>
+            <span className="text-muted">
+              {formatDate(updatedPost.created_at)}
+            </span>
           </div>
           {updatedPost.description && (
             <Card.Text className="mt-3">{updatedPost.description}</Card.Text>

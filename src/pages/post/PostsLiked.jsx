@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
-import Posts from './Posts';
-import useHttpRequest from '../../hooks/http-request-hook';
-import useAuthStore from '../../store/auth-store';
-import usePostStore from '../../store/post-store';
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import Posts from "./Posts";
+import useHttpRequest from "../../hooks/http-request-hook";
+import useAuthStore from "../../store/auth-store";
+import usePostStore from "../../store/post-store";
 
 const PostsLiked = () => {
   const { sendRequest } = useHttpRequest();
@@ -13,15 +13,14 @@ const PostsLiked = () => {
   useEffect(() => {
     const fetchLikedPosts = async () => {
       try {
-        const data = await sendRequest('/post-like/', 'GET', {
+        const data = await sendRequest("/post-like/", "GET", {
           headers: { Authorization: `Token ${token}` },
         });
         setPosts(data || []);
-        console.log("data= " ,data)
-
+        console.log("data= ", data);
       } catch (error) {
         console.error(error);
-        toast.error('Error while fetching liked posts!');
+        toast.error("Error while fetching liked posts!");
         setPosts([]);
       }
     };
@@ -29,7 +28,7 @@ const PostsLiked = () => {
     fetchLikedPosts();
   }, [sendRequest, token, setPosts]);
 
-  return <Posts  title='Liked Posts' />;
+  return <Posts title="Liked Posts" />;
 };
 
 export default PostsLiked;

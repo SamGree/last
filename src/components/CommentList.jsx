@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
-import { ListGroup, Dropdown, Form, Button, Spinner } from 'react-bootstrap';
-import { toast } from 'react-toastify';
-import { FaHeart } from 'react-icons/fa';
-import usePostStore from '../store/post-store';
-import useAuthStore from '../store/auth-store';
-import useHttpRequest from '../hooks/http-request-hook';
-import { formatDate } from '../utils/helper-functions';
+import { useState, useEffect } from "react";
+import { ListGroup, Dropdown, Form, Button, Spinner } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { FaHeart } from "react-icons/fa";
+import usePostStore from "../store/post-store";
+import useAuthStore from "../store/auth-store";
+import useHttpRequest from "../hooks/http-request-hook";
+import { formatDate } from "../utils/helper-functions";
 
-import '../styles/comment-list.css';
+import "../styles/comment-list.css";
 
 const CommentList = () => {
   const { token, user } = useAuthStore();
   const { postId, setComments, comments } = usePostStore();
   const { sendRequest } = useHttpRequest();
   const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editedContent, setEditedContent] = useState('');
+  const [editedContent, setEditedContent] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,11 +22,13 @@ const CommentList = () => {
       const csrfToken = getCsrfToken();
       try {
         setLoading(true);
-        const data = await sendRequest(`/comments/post/${postId}`, 'GET', {
-          headers: { Authorization: `Token ${token}`, 'X-CSRFToken': csrfToken },
+        const data = await sendRequest(`/comments/post/${postId}`, "GET", {
+          headers: {
+            Authorization: `Token ${token}`,
+            "X-CSRFToken": csrfToken,
+          },
         });
         setComments(data);
-        console.log("comments: ", comments)
       } catch (error) {
         console.error("Error fetching comments:", error);
         setComments([]);
@@ -40,31 +42,27 @@ const CommentList = () => {
 
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('csrftoken='));
-    return csrfCookie ? csrfCookie.split('=')[1] : null;
+      .split("; ")
+      .find((row) => row.startsWith("csrftoken="));
+    return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
   const csrfToken = getCsrfToken();
 
   const handleOnToggleLike = async (postId, commentId) => {
     try {
       const csrfToken = getCsrfToken();
-      const response = await sendRequest(
-        `/comment-like/${commentId}`,
-        'POST',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Token ${token}`,
-            'X-CSRFToken': csrfToken,
-          },
-        }
-      );
+      const response = await sendRequest(`/comment-like/${commentId}`, "POST", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+          "X-CSRFToken": csrfToken,
+        },
+      });
       if (response && response.error) {
         toast.error(response.error);
         return;
       }
-      if (response && typeof response.is_liked === 'boolean') {
+      if (response && typeof response.is_liked === "boolean") {
         const updatedComments = comments.map((comment) =>
           comment.id === commentId
             ? {
@@ -74,17 +72,17 @@ const CommentList = () => {
               }
             : comment
         );
-  
+
         setComments(updatedComments);
-        const action = response.is_liked ? 'liked' : 'unliked';
+        const action = response.is_liked ? "liked" : "unliked";
         toast.success(`You have ${action} the comment!`);
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         toast.error(error.response.data.error);
       } else {
-        console.error('Error toggling like:', error);
-        toast.error('Error toggling like');
+        console.error("Error toggling like:", error);
+        toast.error("Error toggling like");
       }
     }
   };
@@ -99,11 +97,11 @@ const CommentList = () => {
       const formData = { content: editedContent };
       await sendRequest(
         `/comments/${commentId}`,
-        'PATCH',
+        "PATCH",
         {
           headers: {
             Authorization: `Token ${token}`,
-            'X-CSRFToken': csrfToken,
+            "X-CSRFToken": csrfToken,
           },
         },
         formData
@@ -117,30 +115,30 @@ const CommentList = () => {
         )
       );
 
-      toast.success('Comment updated successfully!');
+      toast.success("Comment updated successfully!");
       setEditingCommentId(null);
-      setEditedContent('');
+      setEditedContent("");
     } catch (error) {
       console.error(error);
-      toast.error('Error updating comment!');
+      toast.error("Error updating comment!");
     }
   };
 
   const handleDeleteComment = async (commentId) => {
     try {
-      await sendRequest(`/comments/${commentId}`, 'DELETE', {
+      await sendRequest(`/comments/${commentId}`, "DELETE", {
         headers: {
           Authorization: `Token ${token}`,
-          'X-CSRFToken': csrfToken,
+          "X-CSRFToken": csrfToken,
         },
       });
 
       setComments(comments.filter((comment) => comment.id !== commentId));
 
-      toast.success('Comment deleted successfully!');
+      toast.success("Comment deleted successfully!");
     } catch (error) {
       console.error(error);
-      toast.error('Error deleting comment!');
+      toast.error("Error deleting comment!");
     }
   };
 
@@ -172,7 +170,9 @@ const CommentList = () => {
                 <div className="d-flex ms-3">
                   <div onClick={() => handleOnToggleLike(postId, comment.id)}>
                     <FaHeart
-                      className={`me-1 ${comment.is_liked ? 'text-danger' : ''}`}
+                      className={`me-1 ${
+                        comment.is_liked ? "text-danger" : ""
+                      }`}
                     />
                     <span>{comment.likes_count ?? 0}</span>
                   </div>
@@ -223,7 +223,7 @@ const CommentList = () => {
                       className="me-2"
                       onClick={() => {
                         setEditingCommentId(null);
-                        setEditedContent('');
+                        setEditedContent("");
                       }}
                     >
                       Cancel

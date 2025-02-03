@@ -1,18 +1,17 @@
-import { useState, useCallback } from 'react';
-import { Container, Form } from 'react-bootstrap';
-import CustomPagination from '../../components/CustomPagination';
-import PostList from './PostList';
-import { filteredPostsData } from '../../utils/helper-functions';
-import usePostStore from '../../store/post-store';
+import { useState, useCallback } from "react";
+import { Container, Form } from "react-bootstrap";
+import CustomPagination from "../../components/CustomPagination";
+import PostList from "./PostList";
+import { filteredPostsData } from "../../utils/helper-functions";
+import usePostStore from "../../store/post-store";
 
-import '../../styles/posts.css';
+import "../../styles/posts.css";
 
-const Posts = ({ title }) => { 
-  const { posts } = usePostStore();   
-  const [searchTerm, setSearchTerm] = useState('');
+const Posts = ({ title }) => {
+  const { posts } = usePostStore();
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-
 
   const handlePageChange = useCallback((page) => {
     setCurrentPage(page);
@@ -38,13 +37,13 @@ const Posts = ({ title }) => {
   );
 
   return (
-    <Container className='mt-5'>
-      {title && <h1 className='text-center'>{title}</h1>}
-      <Form className='mt-4 posts-form'>
-        <Form.Group controlId='searchInput' className='flex-1'>
+    <Container className="mt-5">
+      {title && <h1 className="text-center">{title}</h1>}
+      <Form className="mt-4 posts-form">
+        <Form.Group controlId="searchInput" className="flex-1">
           <Form.Control
-            type='text'
-            placeholder='Search by Users, Title and Tags'
+            type="text"
+            placeholder="Search by Users, Title and Tags"
             value={searchTerm}
             onChange={handleSearch}
           />

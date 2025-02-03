@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import useAuthStore from './auth-store';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import useAuthStore from "./auth-store";
 const usePostStore = create(
   persist(
     (set, get) => ({
@@ -14,13 +14,16 @@ const usePostStore = create(
         try {
           const authHeaders = useAuthStore.getState().getAuthHeaders();
 
-          const response = await fetch('https://my-e-pics-d3d3d941434e.herokuapp.com/posts/', {
-            method: 'GET',
-            headers: {
-              ...authHeaders,
-              'Content-Type': 'application/json',
-            },
-          });
+          const response = await fetch(
+            "https://my-e-pics-d3d3d941434e.herokuapp.com/posts/",
+            {
+              method: "GET",
+              headers: {
+                ...authHeaders,
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
           if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status}`);
@@ -29,7 +32,7 @@ const usePostStore = create(
           const data = await response.json();
           set({ posts: data });
         } catch (error) {
-          console.error('Error fetching posts:', error);
+          console.error("Error fetching posts:", error);
         }
       },
 
@@ -38,17 +41,20 @@ const usePostStore = create(
         try {
           const authHeaders = useAuthStore.getState().getAuthHeaders();
 
-          const response = await fetch('https://my-e-pics-d3d3d941434e.herokuapp.com/posts/', {
-            method: 'POST',
-            headers: {
-              ...authHeaders,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(postData),
-          });
+          const response = await fetch(
+            "https://my-e-pics-d3d3d941434e.herokuapp.com/posts/",
+            {
+              method: "POST",
+              headers: {
+                ...authHeaders,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            }
+          );
 
           if (!response.ok) {
-            throw new Error('Failed to create post');
+            throw new Error("Failed to create post");
           }
 
           const newPost = await response.json();
@@ -56,7 +62,7 @@ const usePostStore = create(
             posts: [newPost, ...state.posts],
           }));
         } catch (error) {
-          console.error('Error creating post:', error);
+          console.error("Error creating post:", error);
         }
       },
 
@@ -65,22 +71,27 @@ const usePostStore = create(
         try {
           const authHeaders = useAuthStore.getState().getAuthHeaders();
 
-            const response = await fetch(`https://my-e-pics-d3d3d941434e.herokuapp.com/posts/${postId}/`, {
-            method: 'DELETE',
-            headers: {
-              ...authHeaders,
-            },
-          });
+          const response = await fetch(
+            `https://my-e-pics-d3d3d941434e.herokuapp.com/posts/${postId}/`,
+            {
+              method: "DELETE",
+              headers: {
+                ...authHeaders,
+              },
+            }
+          );
 
           if (!response.ok) {
-            throw new Error('Failed to delete post');
+            throw new Error("Failed to delete post");
           }
 
           set((state) => ({
-            posts: state.posts.filter((post) => String(post.id) !== String(postId)),
+            posts: state.posts.filter(
+              (post) => String(post.id) !== String(postId)
+            ),
           }));
         } catch (error) {
-          console.error('Error deleting post:', error);
+          console.error("Error deleting post:", error);
         }
       },
 
@@ -182,7 +193,7 @@ const usePostStore = create(
       },
     }),
     {
-      name: 'post-storage',
+      name: "post-storage",
       getStorage: () => localStorage,
     }
   )

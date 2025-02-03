@@ -11,7 +11,6 @@ import CustomModal from "../../components/CustomModal";
 import usePostStore from "../../store/post-store";
 import useLikedPostsStore from "../../store/liked-post-store";
 
-
 const PostDetails = () => {
   const { sendRequest } = useHttpRequest();
   const { token } = useAuthStore();
@@ -28,93 +27,103 @@ const PostDetails = () => {
     deletePost,
   } = usePostStore();
   const { albums } = useAlbums();
-  const [comment, setComment] = useState('');
-  const [selectedAlbum, setSelectedAlbum] = useState('');
+  const [comment, setComment] = useState("");
+  const [selectedAlbum, setSelectedAlbum] = useState("");
   const [loading, setLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [fetchingPost, setFetchingPost] = useState(true);
   const { likedPosts, setLikedPosts } = useLikedPostsStore();
 
-  useEffect(()=>{
+  useEffect(() => {
     posts.map((post) => {
-      console.log("post before ", post)
-      likedPosts && likedPosts.forEach( (likedPost) => {
-        if (likedPost.id === post.id)
-           {post.is_liked = true;}
-        })
-    })
-  },[posts, likedPosts])
-
+      console.log("post before ", post);
+      likedPosts &&
+        likedPosts.forEach((likedPost) => {
+          if (likedPost.id === post.id) {
+            post.is_liked = true;
+          }
+        });
+    });
+  }, [posts, likedPosts]);
 
   useEffect(() => {
-      const fetchPost = async () => {
-        try {
-          const data = await sendRequest(`/posts/${postId}`);
-          setPostId(postId);
-          setPost(data.post);
-          setComments(data.comments);
-        } catch (error) {
-          console.log(error);
-          toast.error('Error while fetching post details!');
-        } finally {
-          setFetchingPost(false);
+    const fetchPost = async () => {
+      try {
+        const data = await sendRequest(`/posts/${postId}`);
+        setPostId(postId);
+        setPost(data.post);
+        setComments(data.comments);
+      } catch (error) {
+        console.log(error);
+        toast.error("Error while fetching post details!");
+      } finally {
+        setFetchingPost(false);
+      }
+    };
+
+    fetchPost();
+
+    const fetchLikedPost = async () => {
+      if (!token) return;
+
+      try {
+        const data = await sendRequest(
+          "/post-like/",
+          "GET",
+          { headers: { Authorization: `Token ${token}` } },
+          {}
+        );
+        setLikedPosts(data || []);
+
+        if (data && data.length > 0) {
+          data.map((liked_Post) => {
+            if (liked_Post.id == postId) setPost(liked_Post);
+            return;
+          });
         }
-      };
+      } catch (error) {
+        console.log(error);
+        toast.error("Error while fetching post details!");
+      }
+    };
 
-      fetchPost();
+    fetchLikedPost();
+  }, [
+    sendRequest,
+    postId,
+    token,
+    setPostId,
+    setComments,
+    setPost,
+    setLikedPosts,
+  ]);
 
-      const fetchLikedPost = async () => {
-        if ( !token ) return;
-
-        try {
-          const data = await sendRequest('/post-like/','GET',
-            {headers: {'Authorization': `Token ${token}`}},{}
-          );
-          setLikedPosts(data || []);
-
-          if ( data && data.length > 0 ) {
-            data.map(( liked_Post ) => {
-                if (liked_Post.id == postId)
-                  setPost(liked_Post);
-                  return;
-            })
-          };
-        } catch (error) {
-          console.log(error);
-          toast.error('Error while fetching post details!');
-        }
-      };
-
-      fetchLikedPost();
-    
-  }, [sendRequest, postId, token, setPostId, setComments, setPost, setLikedPosts]);
-  
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('csrftoken='));
-    return csrfCookie ? csrfCookie.split('=')[1] : null;
+      .split("; ")
+      .find((row) => row.startsWith("csrftoken="));
+    return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
   const csrfToken = getCsrfToken();
   const handleAddToAlbum = async () => {
     if (!selectedAlbum) {
-      toast.error('Please select an album!');
+      toast.error("Please select an album!");
       return;
     }
 
     try {
       setLoading(true);
-      await sendRequest(`/albums/${selectedAlbum}/add-post/${postId}`, 'POST', {
+      await sendRequest(`/albums/${selectedAlbum}/add-post/${postId}`, "POST", {
         headers: {
           Authorization: `Token ${token}`,
-          'X-CSRFToken': csrfToken,
+          "X-CSRFToken": csrfToken,
         },
       });
 
-      toast.success('Post successfully added to the album!');
+      toast.success("Post successfully added to the album!");
     } catch (error) {
       console.error(error);
-      toast.error('Error while adding post to the album!');
+      toast.error("Error while adding post to the album!");
     } finally {
       setLoading(false);
     }
@@ -127,29 +136,27 @@ const PostDetails = () => {
       setLoading(true);
       const newComment = await sendRequest(
         `/comments/${postId}/post`,
-        'POST',
+        "POST",
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Token ${token}`,
-            'X-CSRFToken': csrfToken,
+            "X-CSRFToken": csrfToken,
           },
         },
         { content: comment }
       );
 
       addComment(newComment);
-      setComment('');
-      toast.success('Comment submitted successfully!');
+      setComment("");
+      toast.success("Comment submitted successfully!");
     } catch (error) {
       console.log(error);
-      toast.error('Error while submitting comment!');
+      toast.error("Error while submitting comment!");
     } finally {
       setLoading(false);
     }
   };
-
-
 
   const handleEdit = () => {
     navigate(`/posts/${postId}/edit`);
@@ -157,19 +164,19 @@ const PostDetails = () => {
 
   const handleDelete = async () => {
     try {
-      await sendRequest(`/posts/${postId}`, 'DELETE', {
+      await sendRequest(`/posts/${postId}`, "DELETE", {
         headers: {
           Authorization: `Token ${token}`,
-          'X-CSRFToken': csrfToken,
+          "X-CSRFToken": csrfToken,
         },
       });
       removePost(postId);
       deletePost();
-      toast.success('Post deleted successfully!');
-      navigate('/');
+      toast.success("Post deleted successfully!");
+      navigate("/");
     } catch (error) {
       console.log(error);
-      toast.error('Error while deleting post!');
+      toast.error("Error while deleting post!");
     } finally {
       setShowDeleteModal(false);
     }
@@ -177,70 +184,71 @@ const PostDetails = () => {
 
   if (fetchingPost) {
     return (
-      <Container className='mt-5 text-center'>
-        <Spinner animation='border' variant='primary' />
+      <Container className="mt-5 text-center">
+        <Spinner animation="border" variant="primary" />
       </Container>
     );
   }
 
   return (
-    <Container className='mt-5 max-w-800'>
+    <Container className="mt-5 max-w-800">
       <CardDetails
         post={post}
         handleEdit={handleEdit}
         setShowDeleteModal={setShowDeleteModal}
       />
 
-      <h5 className='mt-4'>Add Post to an Album</h5>
-      <Form className='mb-3'>
-        <Form.Group controlId='selectAlbum'>
+      <h5 className="mt-4">Add Post to an Album</h5>
+      <Form className="mb-3">
+        <Form.Group controlId="selectAlbum">
           <Form.Label>Select Album</Form.Label>
           <select
             value={selectedAlbum}
             onChange={(e) => setSelectedAlbum(e.target.value)}
             disabled={loading}
           >
-              <option value=''>Choose an album</option>
-            {albums?.length && albums.map((album) => (
-              <option key={album.id} value={`${album.id}`}>
-                {album.name}
-              </option>
-            ))}
+            <option value="">Choose an album</option>
+            {albums?.length &&
+              albums.map((album) => (
+                <option key={album.id} value={`${album.id}`}>
+                  {album.name}
+                </option>
+              ))}
           </select>
         </Form.Group>
         <Button
-          variant='primary'
-          className='mt-2'
+          variant="primary"
+          className="mt-2"
           onClick={handleAddToAlbum}
           disabled={loading || !selectedAlbum}
         >
           {loading ? (
-            <Spinner as='span' animation='border' size='sm' />
+            <Spinner as="span" animation="border" size="sm" />
           ) : (
-            'Save'
+            "Save"
           )}
         </Button>
       </Form>
 
-      <Form className='mt-4'>
-        <Form.Group controlId='commentInput' className='mb-3'>
+      <Form className="mt-4">
+        <Form.Group controlId="commentInput" className="mb-3">
           <Form.Control
-            type='text'
-            placeholder='Leave your comment here'
+            type="text"
+            placeholder="Leave your comment here"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             disabled={loading}
           />
         </Form.Group>
         <Button
-          variant='primary'
+          variant="primary"
           onClick={handleSubmitComment}
           disabled={loading || !comment.trim()}
         >
           {loading ? (
-            <Spinner as='span' animation='border' size='sm' />
+            <Spinner as="span" animation="border" size="sm" />
           ) : (
-            'Submit Comment'
+            "Submit Comment"
           )}
         </Button>
       </Form>
@@ -250,8 +258,8 @@ const PostDetails = () => {
       <CustomModal
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
-        title='Confirm Deletion'
-        body='Are you sure you want to delete this post?'
+        title="Confirm Deletion"
+        body="Are you sure you want to delete this post?"
         onConfirm={handleDelete}
       />
     </Container>

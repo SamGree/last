@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
-import Posts from '../post/Posts';
-import useHttpRequest from '../../hooks/http-request-hook';
-import useAuthStore from '../../store/auth-store';
-import usePostStore from '../../store/post-store';
-import useLikedPostsStore from '../../store/liked-post-store';
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import Posts from "../post/Posts";
+import useHttpRequest from "../../hooks/http-request-hook";
+import useAuthStore from "../../store/auth-store";
+import usePostStore from "../../store/post-store";
+import useLikedPostsStore from "../../store/liked-post-store";
 
 const Profile = () => {
-  const { user, token, getAuthHeaders } = useAuthStore();  // Fetch token & auth headers
+  const { user, token, getAuthHeaders } = useAuthStore(); // Fetch token & auth headers
   const { sendRequest } = useHttpRequest();
   const { posts, setPosts, updatePosts } = usePostStore();
   const { likedPosts, setLikedPosts } = useLikedPostsStore();
@@ -19,17 +19,17 @@ const Profile = () => {
       try {
         const authHeaders = getAuthHeaders(); // Get authentication headers
 
-        const data = await sendRequest(`/users/profile/${user.id}`, 'GET', {
+        const data = await sendRequest(`/users/profile/${user.id}`, "GET", {
           headers: {
-            ...authHeaders,  // Add Authorization header
-            'Content-Type': 'application/json',
+            ...authHeaders, // Add Authorization header
+            "Content-Type": "application/json",
           },
         });
 
         setPosts(data.posts || []);
       } catch (error) {
-        console.error('Error fetching user posts:', error);
-        toast.error('Error while fetching user posts!');
+        console.error("Error fetching user posts:", error);
+        toast.error("Error while fetching user posts!");
         setPosts([]);
       }
     };
@@ -37,48 +37,49 @@ const Profile = () => {
     fetchPosts();
 
     const fetchLikedPost = async () => {
-      if ( !token ) return;
+      if (!token) return;
 
       try {
-        const data = await sendRequest('/post-like/','GET',
-          {headers: {'Authorization': `Token ${token}`}},{}
+        const data = await sendRequest(
+          "/post-like/",
+          "GET",
+          { headers: { Authorization: `Token ${token}` } },
+          {}
         );
         setLikedPosts(data || []);
-        
       } catch (error) {
         console.log(error);
-        toast.error('Error while fetching post details!');
-        setLikedPosts([])
+        toast.error("Error while fetching post details!");
+        setLikedPosts([]);
       }
     };
 
-    fetchLikedPost();    
-
+    fetchLikedPost();
   }, [sendRequest, user.id, token, setPosts, setLikedPosts, getAuthHeaders]); // Added getAuthHeaders to dependencies
 
   // Get CSRF Token (For Django CSRF protection)
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('csrftoken='));
-    return csrfCookie ? csrfCookie.split('=')[1] : null;
+      .split("; ")
+      .find((row) => row.startsWith("csrftoken="));
+    return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
   const csrfToken = getCsrfToken();
 
   const handleToggleLike = async (postId) => {
     if (!token) {
-      toast.error('You need to be logged in to like posts.');
+      toast.error("You need to be logged in to like posts.");
       return;
     }
 
     try {
       const authHeaders = getAuthHeaders(); // Get authentication headers
 
-      const response = await sendRequest(`/post-like/${postId}`, 'POST', {
+      const response = await sendRequest(`/post-like/${postId}`, "POST", {
         headers: {
           ...authHeaders,
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken, // Include CSRF token
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken, // Include CSRF token
         },
       });
 
@@ -94,11 +95,11 @@ const Profile = () => {
               : post
           )
         );
-        toast.success(response.message || 'Like status updated.');
+        toast.success(response.message || "Like status updated.");
       }
     } catch (error) {
-      console.error('Error toggling like:', error);
-      toast.error('Failed to update like status.');
+      console.error("Error toggling like:", error);
+      toast.error("Failed to update like status.");
     }
   };
 

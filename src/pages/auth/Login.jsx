@@ -18,8 +18,6 @@ const Login = () => {
     return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
 
-
-
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -30,7 +28,12 @@ const Login = () => {
           const data = await sendRequest(
             "/users/login/",
             "POST",
-            { headers: { "Content-Type": "application/json","X-CSRFToken": csrfToken, } },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+              },
+            },
             { username, password }
           );
           setUser(data.user);
@@ -41,7 +44,6 @@ const Login = () => {
           toast.error("Invalid username or password!");
         }
       } catch (error) {
-        console.log(error);
         toast.error("Error during login!");
       }
     };

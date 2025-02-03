@@ -44,9 +44,9 @@ const EditPost = () => {
 
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('csrftoken='));
-    return csrfCookie ? csrfCookie.split('=')[1] : null;
+      .split("; ")
+      .find((row) => row.startsWith("csrftoken="));
+    return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
 
   const handleImageChange = (e) => {
@@ -91,7 +91,7 @@ const EditPost = () => {
         {
           headers: {
             Authorization: `Token ${token}`,
-            'X-CSRFToken': csrfToken,
+            "X-CSRFToken": csrfToken,
           },
         },
         formData
@@ -181,7 +181,11 @@ const EditPost = () => {
           </Col>
           <Col>
             <Button variant="primary" onClick={handleSubmit} disabled={loading}>
-              {loading ? <Spinner as="span" animation="border" size="sm" /> : "Submit"}
+              {loading ? (
+                <Spinner as="span" animation="border" size="sm" />
+              ) : (
+                "Submit"
+              )}
             </Button>
           </Col>
         </Row>

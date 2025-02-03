@@ -1,23 +1,25 @@
-import { ListGroup, ListGroupItem, Container, Tooltip } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import PostCard from '../../components/PostCard';
-import { useEffect } from 'react';
-import useLikedPostsStore from '../../store/liked-post-store';
+import { ListGroup, ListGroupItem, Container, Tooltip } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import PostCard from "../../components/PostCard";
+import { useEffect } from "react";
+import useLikedPostsStore from "../../store/liked-post-store";
 
-import '../../styles/post-list.css';
+import "../../styles/post-list.css";
 
 const PostList = ({ posts }) => {
   const navigate = useNavigate();
   const { likedPosts } = useLikedPostsStore();
 
-  useEffect(()=>{
+  useEffect(() => {
     posts.map((post) => {
-      likedPosts && likedPosts.forEach( (likedPosts) => {
-        if (likedPosts.id === post.id)
-           {post.is_liked = true;}
-        })
-    })
-  },[posts])
+      likedPosts &&
+        likedPosts.forEach((likedPosts) => {
+          if (likedPosts.id === post.id) {
+            post.is_liked = true;
+          }
+        });
+    });
+  }, [posts]);
 
   const renderTooltip = (props, username) => (
     <Tooltip {...props}>{username}</Tooltip>
@@ -28,15 +30,15 @@ const PostList = ({ posts }) => {
   };
 
   return (
-    <Container className='mt-2 post-list-container'>
+    <Container className="mt-2 post-list-container">
       {!Array.isArray(posts) || posts.length === 0 ? (
-        <div className='d-flex justify-content-center align-items-center no-posts'>
-          <p className='text-muted'>There are no posts at the moment.</p>
+        <div className="d-flex justify-content-center align-items-center no-posts">
+          <p className="text-muted">There are no posts at the moment.</p>
         </div>
       ) : (
-        <ListGroup className='post-list-group'>
+        <ListGroup className="post-list-group">
           {posts.map((post) => (
-            <ListGroupItem key={post.id} className='w-100 post-list-group-item'>
+            <ListGroupItem key={post.id} className="w-100 post-list-group-item">
               <PostCard
                 post={post}
                 handleOnPostDetails={handleOnPostDetails}

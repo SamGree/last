@@ -22,10 +22,10 @@ const AddPost = () => {
   });
   const [preview, setPreview] = useState(null);
   const getCsrfToken = () => {
-  const csrfCookie = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('csrftoken='));
-    return csrfCookie ? csrfCookie.split('=')[1] : null;
+    const csrfCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("csrftoken="));
+    return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -88,7 +88,7 @@ const AddPost = () => {
         {
           headers: {
             Authorization: `Token ${token}`,
-            'X-CSRFToken': csrfToken,
+            "X-CSRFToken": csrfToken,
           },
         },
         formPayload
@@ -159,7 +159,12 @@ const AddPost = () => {
         </Form.Group>
         {preview && (
           <div className="mb-3 text-center">
-            <Image src={preview} alt="Image Preview" className="image-preview" rounded />
+            <Image
+              src={preview}
+              alt="Image Preview"
+              className="image-preview"
+              rounded
+            />
           </div>
         )}
         <Button variant="primary" type="submit" className="w-100">

@@ -1,11 +1,11 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { getHours, addHours, set } from 'date-fns';
-import { toZonedTime } from 'date-fns-tz';
+import React, { createContext, useState, useEffect, useCallback } from "react";
+import { getHours, addHours, set } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
   const determineTheme = () => {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -13,7 +13,7 @@ export const ThemeProvider = ({ children }) => {
     const zonedTime = toZonedTime(now, timeZone);
     const currentHour = getHours(zonedTime);
 
-    setTheme(currentHour >= 6 && currentHour < 18 ? 'dark' : 'light');
+    setTheme(currentHour >= 6 && currentHour < 18 ? "dark" : "light");
   };
 
   const scheduleNextChange = useCallback(() => {
@@ -57,7 +57,7 @@ export const ThemeProvider = ({ children }) => {
   }, [scheduleNextChange]);
 
   const toggleThemeManually = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   return (

@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 const useAlbumStore = create(
   persist(
@@ -41,7 +41,7 @@ const useAlbumStore = create(
       },
     }),
     {
-      name: 'album-storage',
+      name: "album-storage",
       getStorage: () => localStorage,
     }
   )

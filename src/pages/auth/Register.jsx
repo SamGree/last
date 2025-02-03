@@ -84,7 +84,7 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-  
+
     const registerUser = async () => {
       try {
         const formDataToSend = new FormData();
@@ -94,27 +94,27 @@ const Register = () => {
         if (formData.profile_image) {
           formDataToSend.append("profile_image", formData.profile_image);
         }
-  
+
         // Call the API
         await sendRequest("/users/register/", "POST", {}, formDataToSend);
-  
+
         toast.success("Registration is successful.");
         navigate("/login");
       } catch (error) {
         console.error("Error during registration:", error);
         if (error.response) {
           console.error("Server Response:", error.response.data);
-          const errorMessage = error.response.data?.error || "Invalid request data.";
+          const errorMessage =
+            error.response.data?.error || "Invalid request data.";
           toast.error(errorMessage);
         } else {
           toast.error("Network error or server unavailable.");
         }
       }
     };
-  
+
     registerUser();
   };
-  
 
   return (
     <Container className="mt-5 max-w-400">
@@ -169,16 +169,30 @@ const Register = () => {
 
         <Form.Group controlId="formAvatar" className="mb-3">
           <Form.Label>Upload Avatar</Form.Label>
-          <Form.Control type="file" name="profile_image" onChange={handleChange} accept="image/*" />
+          <Form.Control
+            type="file"
+            name="profile_image"
+            onChange={handleChange}
+            accept="image/*"
+          />
         </Form.Group>
 
         {avatarPreview && (
           <div className="text-center mb-3">
-            <Image src={avatarPreview} roundedCircle className="avatar-preview" />
+            <Image
+              src={avatarPreview}
+              roundedCircle
+              className="avatar-preview"
+            />
           </div>
         )}
 
-        <Button variant="primary" type="submit" className="w-100" disabled={!isFormValid}>
+        <Button
+          variant="primary"
+          type="submit"
+          className="w-100"
+          disabled={!isFormValid}
+        >
           Register
         </Button>
       </Form>

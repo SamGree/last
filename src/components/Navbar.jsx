@@ -5,15 +5,14 @@ import useTheme from "../hooks/theme-hook";
 import useAuthStore from "../store/auth-store";
 import useHttpRequest from "../hooks/http-request-hook";
 
-
 import "../styles/navbar.css";
 import { toast } from "react-toastify";
 
 const getCsrfToken = () => {
   const csrfCookie = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith('csrftoken='));
-  return csrfCookie ? csrfCookie.split('=')[1] : null;
+    .split("; ")
+    .find((row) => row.startsWith("csrftoken="));
+  return csrfCookie ? csrfCookie.split("=")[1] : null;
 };
 const NavBar = () => {
   const { isAuthenticated, clearAuth, token, user } = useAuthStore();
@@ -22,30 +21,47 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     await sendRequest("/users/logout/", "POST", {
-      headers: { Authorization: `Token ${token}`, 'X-CSRFToken': getCsrfToken(), },
+      headers: {
+        Authorization: `Token ${token}`,
+        "X-CSRFToken": getCsrfToken(),
+      },
     });
     clearAuth();
     toast.success("Signout successful!");
   };
 
   const getLinkClass = (isActive) =>
-    `nav-link ${isActive ? (theme === "dark" ? "text-white" : "text-gray") : "text-secondary"}`;
+    `nav-link ${
+      isActive
+        ? theme === "dark"
+          ? "text-white"
+          : "text-gray"
+        : "text-secondary"
+    }`;
 
   return (
     <Navbar bg={theme} variant={theme} expand="lg">
       <Container>
         <Navbar.Brand>
-          <Link to="/"  style={{textDecoration: 'none', color:'green'}}>E-Pics</Link>
+          <Link to="/" style={{ textDecoration: "none", color: "green" }}>
+            E-Pics
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <NavLink to="/" className={({ isActive }) => getLinkClass(isActive)}>
+            <NavLink
+              to="/"
+              className={({ isActive }) => getLinkClass(isActive)}
+            >
               Home
             </NavLink>
             {isAuthenticated ? (
               <Fragment>
-                <NavLink to="/user/profile" className={({ isActive }) => getLinkClass(isActive)}>
+                <NavLink
+                  to="/user/profile"
+                  className={({ isActive }) => getLinkClass(isActive)}
+                >
                   {user.username || "Profile"}
                 </NavLink>
 
@@ -71,16 +87,25 @@ const NavBar = () => {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <span className="nav-link text-secondary logout-link" onClick={handleLogout}>
+                <span
+                  className="nav-link text-secondary logout-link"
+                  onClick={handleLogout}
+                >
                   Logout
                 </span>
               </Fragment>
             ) : (
               <Fragment>
-                <NavLink to="/login" className={({ isActive }) => getLinkClass(isActive)}>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) => getLinkClass(isActive)}
+                >
                   Login
                 </NavLink>
-                <NavLink to="/register" className={({ isActive }) => getLinkClass(isActive)}>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) => getLinkClass(isActive)}
+                >
                   Register
                 </NavLink>
               </Fragment>
