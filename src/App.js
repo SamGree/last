@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "./context/theme-context";
 import NavBar from "./components/Navbar";
@@ -23,7 +23,8 @@ import PostDetails from "./pages/post/PostDetails";
 function App() {
   return (
     <ThemeProvider>
-      <Router>
+      {/* Added `future` flag for React Router v7 compatibility */}
+      <BrowserRouter future={{ v7_relativeSplatPath: true }}>  
         <GlobalHelmet />
         <NavBar />
         <Routes>
@@ -44,7 +45,7 @@ function App() {
           </Route>
         </Routes>
         <ToastContainer position="bottom-right" />
-      </Router>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
