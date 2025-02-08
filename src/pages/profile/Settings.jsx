@@ -18,7 +18,10 @@ const Settings = () => {
     profile_image: user.profileImage || null,
     bio: user.bio || "",
   });
-  const [avatarPreview, setAvatarPreview] = useState(user.profileImage || null);
+
+  const [avatarPreview, setAvatarPreview] = useState(
+    user.profile_image || noAvatar
+  );
   const [loadingImage, setLoadingImage] = useState(false);
 
   const handleChange = (e) => {
