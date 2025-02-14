@@ -79,6 +79,22 @@ Additionally, you can connect with the community by leaving comments, giving lik
 - ![Navbar](/readme.img/navigation%20bar.png)
 
 ---
+### Registration Page
+- The Registration Page allows new users to create an account by providing their credentials and uploading a profile avatar.
+  - Username: Users can enter their desired username. Username cannot exceed 15 characters.The username field must be unique.
+  - Password: Users can input their password for account security.
+  - Confirm Password: Users must re-enter their password to ensure it matches.
+  - Upload Avatar: Users can upload an image file to set as their profile avatar.
+  - Register button to submit their information and create an account.
+- ![Registration](/readme.img/registerpage.png)
+---
+### Login page
+- The Login Page allows registered users to access their accounts by entering their credentials.
+-Username: Users must enter their registered username.
+- Password: Users must enter their account password.
+- Users can click the "Login" button to authenticate and access their account.
+- ![login](/readme.img/login.page.png)
+---
 
 - Search Functionality:
   A search bar allows users to search posts by keywords like Users, Titles, or Tags for quick filtering and navigation.
@@ -113,6 +129,7 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 - As a logged-in user, I can click on the comment icon to share my thoughts on any post.
 - Users can read comments from other users if any exist. Users can like comments if they wish but _NOT_ your own comment.
+- You can also delete or edit your own comment while when you are logged in
 - ![edit delete comment](/readme.img/edit.delete.comment.png)
 
 ---
@@ -195,7 +212,12 @@ Create Album:
 - ![settings](/readme.img/settingsform.png)
 
 ---
-
+### Toaster Messages in the Project
+- In this project, toaster messages are used to provide real-time feedback for user actions. These notifications appear in the bottom right corner of the screen to inform users about the success or failure of their actions.
+- here are some example
+- ![toster](/readme.img/toaster.png) .![toaster1](/readme.img/toaster1.png)
+- ![toaster2](/readme.img/toaster2.png) .![toaster3](/readme.img/toaster3.png)
+---
 ## Design
 
 ### Wireframes
@@ -279,7 +301,7 @@ Create Album:
 
 | Tasks                                              | Yes | No  |
 | -------------------------------------------------- | --- | --- |
-| lick on Login, dispaly form for login page.        | x   |     |
+| Click on Login, dispaly form for login page.        | x   |     |
 | Form shouldnt be blank.                            | x   |     |
 | You have sign, and taken to your posts page.       | x   |     |
 | After login, the user name displays in the navbar. | x   |     |
