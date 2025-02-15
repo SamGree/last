@@ -232,7 +232,7 @@ Create Album:
 
 ### Wireframes
 
-- Mobile and Ipad
+- Mobile and iPad versions will share the same structure.
 - Home page wireframe.
 - ![Mobile](/readme.img/wireframes.mobile.png) ![navbar](/readme.img/navbar.drop.png)
 
@@ -241,19 +241,64 @@ Create Album:
 - Login and register page wireframe
 - ![login](/readme.img/login.page.wireframes.png)
 - ![register](/readme.img/registerpage.wirefram.png)
+
+---
+
 - User when logged in.
 - ![logged in wirefram](/readme.img/wire.loggedin.png)
+
+---
+
 - Album
 - ![albumpagewire](/readme.img/wire.album.png)
+
+---
+
 - liked posts page
 - ![wirelikedposts](/readme.img/wire.liked.p.png)
+
+---
+
 - Add new posts
 - ![wirenewpost](/readme.img/wire.add.new.post.png)
+
+---
+
 - Setting page
 - ![wiresettings](/readme.img/wire.settings.png)
 
 ---
 
+- Laptop and desktop versions will share the same structure.
+- Home 
+- ![wirelaphome](/readme.img/wire.laptop.home.png)
+---
+- Register
+- ![wire.lap.register](/readme.img/wire.lap.register.png)
+---
+- Login
+- ![wire.lap.login](/readme.img/wire.lap.login.png)
+---
+- User page
+- ![user page](/readme.img/wire.lap.userpage.png)
+---
+- User home page
+- While logged in, if a user has added posts, a dropdown menu will appear in the top-right corner next to the avatar on each post. This menu allows the user to access the "Go to details" option for their own posts.
+- ![User home page](/readme.img/wire.user.lap.option.png)
+- If the user clicks on Go to details, they will be taken to a page where they can delete the image or edit its details.
+- ![delete img](/readme.img/wire.delete.imglap.png)
+---
+- Comment
+  - Like post.
+  - Download post.
+  - Add post to album.
+  - write a comment. Edit or delete your comment.
+  - Like othere user's comment.
+  - If you have liked any post or comment you can also unlike it by clicking on it again.
+- ![comment](/readme.img/wirer.u.dc.png)
+---
+
+---
 ## Manual test
 
 ### Navbar
