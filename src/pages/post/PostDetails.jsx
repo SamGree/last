@@ -171,7 +171,7 @@ const PostDetails = () => {
         },
       });
       removePost(postId);
-      deletePost();
+      deletePost(postId);
       toast.success("Post deleted successfully!");
       navigate("/");
     } catch (error) {
