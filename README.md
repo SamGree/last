@@ -158,7 +158,7 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 - Form for Adding New Posts.
   - Title Input Field: - Placeholder: "Enter post title." - Placeholder: "Enter post description." - Placeholder: "Enter tags" - Users can upload a file or image related to their post.
-    Includes a "Choose File" button for selecting the file.
+    Includes a "Choose File" button for selecting the file. Size to download the image max 2MB.
     Displays "No file chosen" by default when no file has been uploaded. - A Submit button with a visually distinct style (purple).
 - ![form add post](/readme.img/formaddnewpost.png)
 
@@ -297,6 +297,11 @@ Create Album:
   - If you have liked any post or comment you can also unlike it by clicking on it again.
 - ![comment](/readme.img/wirer.u.dc.png)
 ---
+- Album page
+- ![album wire](/readme.img/wire.album.lap.png)
+---
+- Settings page
+- ![Wirefram for settings page](/readme.img/Wire.setting.lap.png)
 
 ---
 ## Manual test
