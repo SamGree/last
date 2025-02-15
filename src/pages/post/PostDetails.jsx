@@ -170,7 +170,7 @@ const PostDetails = () => {
           "X-CSRFToken": csrfToken,
         },
       });
-      removePost(postId);
+      removePost(post.postId);
       deletePost(postId);
       toast.success("Post deleted successfully!");
       navigate("/");
