@@ -4,6 +4,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import { toast } from "react-toastify";
 import useAuthStore from "../../store/auth-store";
 import useHttpRequest from "../../hooks/http-request-hook";
+import useLikedPostsStore from "../../store/liked-post-store";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,12 +12,33 @@ const Login = () => {
   const { sendRequest } = useHttpRequest();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { setLikedPosts } = useLikedPostsStore();
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
       .split("; ")
       .find((row) => row.startsWith("csrftoken="));
     return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
+
+  useEffect(() => {
+    const fetchLikedPosts = async () => {
+      if (!token) return;
+      try {
+        const data = await sendRequest(
+          "/post-like/",
+          "GET",
+          { headers: { Authorization: `Token ${token}` } },
+          {}
+        );
+        setLikedPosts(data || []);
+      } catch (error) {
+        console.error(error);
+        toast.error("Error while fetching liked posts!");
+        setLikedPosts([]);
+      }
+    };
+    fetchLikedPosts();
+  }, [sendRequest, setLikedPosts]);
 
   const handleLogin = (e) => {
     e.preventDefault();
