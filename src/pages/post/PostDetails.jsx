@@ -114,17 +114,21 @@ const PostDetails = () => {
 
     try {
       setLoading(true);
-      await sendRequest(`/albums/${selectedAlbum}/add-post/${postId}`, "POST", {
-        headers: {
-          Authorization: `Token ${token}`,
-          "X-CSRFToken": csrfToken,
-        },
-      });
+      const response = await sendRequest(
+        `/albums/${selectedAlbum}/add-post/${postId}`,
+        "POST",
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            "X-CSRFToken": csrfToken,
+          },
+        }
+      );
 
-      if (response.message === "Post is already in the album"){
+      if (response.message === "Post is already in the album") {
         toast.success("Post is already in the album!");
         return;
-      }  
+      }
 
       toast.success("Post successfully added to the album!");
     } catch (error) {
