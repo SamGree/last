@@ -4,6 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 import useTheme from "../hooks/theme-hook";
 import useAuthStore from "../store/auth-store";
 import useHttpRequest from "../hooks/http-request-hook";
+import useLikedPostsStore from "../store/liked-post-store";
 
 import "../styles/navbar.css";
 import { toast } from "react-toastify";
@@ -16,6 +17,7 @@ const getCsrfToken = () => {
 };
 const NavBar = () => {
   const { isAuthenticated, clearAuth, token, user } = useAuthStore();
+  const { clearLikedPostsStorage } = useLikedPostsStore();
   const { sendRequest } = useHttpRequest();
   const { theme } = useTheme();
 
@@ -27,6 +29,7 @@ const NavBar = () => {
       },
     });
     clearAuth();
+    clearLikedPostsStorage();
     toast.success("Signout successful!");
   };
 

@@ -8,6 +8,13 @@ const useLikedPostsStore = create(
       postId: null,
       likedPost: null,
 
+      clearLikedPostsStorage: () =>
+        set(() => ({
+          likedPosts: [],
+          postId: null,
+          likedPost: null,
+        })),
+
       setLikedPosts: (likedPosts) =>
         set(() => ({
           likedPosts: Array.isArray(likedPosts) ? likedPosts : [],
