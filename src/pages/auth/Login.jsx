@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -13,6 +13,8 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setLikedPosts } = useLikedPostsStore();
+  const { token } = useAuthStore();
+  
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
       .split("; ")
