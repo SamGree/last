@@ -105,6 +105,7 @@ const PostDetails = () => {
     return csrfCookie ? csrfCookie.split("=")[1] : null;
   };
   const csrfToken = getCsrfToken();
+
   const handleAddToAlbum = async () => {
     if (!selectedAlbum) {
       toast.error("Please select an album!");
@@ -119,6 +120,11 @@ const PostDetails = () => {
           "X-CSRFToken": csrfToken,
         },
       });
+
+      if (response.message === "Post is already in the album"){
+        toast.success("Post is already in the album!");
+        return;
+      }  
 
       toast.success("Post successfully added to the album!");
     } catch (error) {
