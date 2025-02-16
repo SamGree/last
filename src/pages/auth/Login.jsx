@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { setLikedPosts } = useLikedPostsStore();
   const { token } = useAuthStore();
-  
+
   const getCsrfToken = () => {
     const csrfCookie = document.cookie
       .split("; ")
@@ -40,7 +40,7 @@ const Login = () => {
       }
     };
     fetchLikedPosts();
-  }, [sendRequest, setLikedPosts]);
+  }, [sendRequest, setLikedPosts, setToken, setUser]);
 
   const handleLogin = (e) => {
     e.preventDefault();
