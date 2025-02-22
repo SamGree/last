@@ -48,7 +48,7 @@ const Profile = () => {
         );
         setLikedPosts(data || []);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         toast.error("Error while fetching post details!");
         setLikedPosts([]);
       }

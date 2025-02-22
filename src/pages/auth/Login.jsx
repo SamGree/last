@@ -40,7 +40,7 @@ const Login = () => {
       }
     };
     fetchLikedPosts();
-  }, [sendRequest, setLikedPosts, setToken, setUser]);
+  }, [sendRequest, setLikedPosts, setToken, setUser, token]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -93,6 +93,7 @@ const Login = () => {
             type="password"
             placeholder="Password"
             value={password}
+            autoComplete="false"
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>

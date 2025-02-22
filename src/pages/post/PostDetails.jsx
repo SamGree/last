@@ -24,7 +24,7 @@ const PostDetails = () => {
     addComment,
     setPost,
     post,
-    deletePost,
+    // deletePost,
   } = usePostStore();
   const { albums } = useAlbums();
   const [comment, setComment] = useState("");
@@ -36,7 +36,7 @@ const PostDetails = () => {
 
   useEffect(() => {
     posts.map((post) => {
-      console.log("post before ", post);
+      // console.log("post before ", post);
       likedPosts &&
         likedPosts.forEach((likedPost) => {
           if (likedPost.id === post.id) {
@@ -54,7 +54,7 @@ const PostDetails = () => {
         setPost(data.post);
         setComments(data.comments);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         toast.error("Error while fetching post details!");
       } finally {
         setFetchingPost(false);
@@ -77,12 +77,12 @@ const PostDetails = () => {
 
         if (data && data.length > 0) {
           data.map((liked_Post) => {
-            if (liked_Post.id == postId) setPost(liked_Post);
+            if (liked_Post.id === postId) setPost(liked_Post);
             return;
           });
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
         toast.error("Error while fetching post details!");
       }
     };
@@ -161,7 +161,7 @@ const PostDetails = () => {
       setComment("");
       toast.success("Comment submitted successfully!");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Error while submitting comment!");
     } finally {
       setLoading(false);
@@ -185,7 +185,7 @@ const PostDetails = () => {
       toast.success("Post deleted successfully!");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Error while deleting post!");
     } finally {
       setShowDeleteModal(false);

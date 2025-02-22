@@ -33,7 +33,7 @@ const AddPost = () => {
     if (files) {
       const file = files[0];
       const maxSize = 2 * 1024 * 1024; // 2 MB in bytes
-      console.log(file.size, maxSize);
+      // console.log(file.size, maxSize);
       if (file?.size > maxSize) {
         toast.error("File size exceeds 2 MB. Please upload a smaller file.");
         e.target.value = "";

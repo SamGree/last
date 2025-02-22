@@ -1,6 +1,7 @@
 # E-pics
 
 - ![am i responsive](/readme.img/ami.png)
+- live link - [E-pics](https://last-epics-76629a697a31.herokuapp.com/)
 
 ---
 
@@ -14,6 +15,8 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 ---
 
+global helmet
+
 ## Table of Contents
 
 ---
@@ -22,25 +25,30 @@ Additionally, you can connect with the community by leaving comments, giving lik
 - [User Goals](#user-goals)
 - [Features](#features)
   - [Home Page](#home-page)
+  - [Registration Page](#registration-page)
+  - [Login page](#login-page)
   - [Add Post Page](#add-post-page)
   - [Albums Page](#albums-page)
-  - [Liked Posts]()
+  - [Liked Posts](#liked-posts)
   - [Settings Page](#settings-page)
+  - [Logged out](#logged-out)
 - [Design](#design)
-  - [Wireframes](#Wireframes)
+  - [Wireframes section](#wireframes-section)
 - [Manual test](#manual-test)
-  - [Navbar](#Navbar)
+  - [Nav-bar](#nav-bar)
   - [Search field](#search-field)
-  - [Home Page.](#home-page)
+  - [Home_page](#home-page-1)
   - [Register page](#register-page)
-  - [Login page](#login-page)
-  - [Add Post page.](#)
+  - [Login](#login)
+  - [Add Post page.](#add-post-page-1)
   - [Albums](#albums)
-  - []()
-  - []()
-  - []()
-  - []()
-  - []()
+- [Validation](#validation)
+- [Technologies Used](#technologies-used)
+- [Deployment](#deployment)
+  - [Heroku](#heroku)
+- []()
+
+---
 
 ## User Profiles
 
@@ -76,7 +84,7 @@ Additionally, you can connect with the community by leaving comments, giving lik
 - E-Pics Branding: Displays the application title prominently at the top for clear identification.
 - Navigation Bar:
   Includes options to navigate to the Home, Login, and Register pages for quick access.
-- ![Navbar](/readme.img/navigation%20bar.png)
+- ![Nav__bar](/readme.img/navigation%20bar.png)
 
 ---
 
@@ -84,7 +92,7 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 - The Registration Page allows new users to create an account by providing their credentials and uploading a profile avatar.
   - Username: Users can enter their desired username. Username cannot exceed 15 characters.The username field must be unique.
-  - Password: Users can input their password for account security.
+  - Password: Users can input their password for account security. Password must have at least 8 characters.
   - Confirm Password: Users must re-enter their password to ensure it matches.
   - Upload Avatar: Users can upload an image file to set as their profile avatar.
   - Register button to submit their information and create an account.
@@ -116,6 +124,7 @@ Additionally, you can connect with the community by leaving comments, giving lik
 ---
 
 - Post Actions: Like Button: Allows users to like a post, with a heart icon will turn _red_ and the count of likes displayed. If you unlike the post the heard icon will turn black.
+- If you like a post, the heart icon will turn red and remain red as long as you're signed in. When you sign out, the heart icon will appear gray for every post. However, when you sign back in, any posts you've previously liked will automatically display a red heart again, otherwise heart will display black when you are sig in.
 - ![redheart](/readme.img/redheart.png)
 - Comment Button: Enables users to comment on the post, with the count of comments displayed.
 - Download Button: Provides an option to download the post content, with the download count displayed and valid date is associated with the post.
@@ -219,6 +228,12 @@ Create Album:
 
 ---
 
+### Logged out
+
+- When user logged out you will be redirecting to the login page, informs the user that they’ve been successfully logged out and provides them an immediate option to log back in if they logged out by mistake. Improved user experience.
+
+---
+
 ### Toaster Messages in the Project
 
 - In this project, toaster messages are used to provide real-time feedback for user actions. These notifications appear in the bottom right corner of the screen to inform users about the success or failure of their actions.
@@ -230,7 +245,7 @@ Create Album:
 
 ## Design
 
-### Wireframes
+### Wireframes section
 
 - Mobile and iPad versions will share the same structure.
 - Home page wireframe.
@@ -270,24 +285,34 @@ Create Album:
 ---
 
 - Laptop and desktop versions will share the same structure.
-- Home 
+- Home
 - ![wirelaphome](/readme.img/wire.laptop.home.png)
+
 ---
+
 - Register
 - ![wire.lap.register](/readme.img/wire.lap.register.png)
+
 ---
+
 - Login
 - ![wire.lap.login](/readme.img/wire.lap.login.png)
+
 ---
+
 - User page
 - ![user page](/readme.img/wire.lap.userpage.png)
+
 ---
+
 - User home page
 - While logged in, if a user has added posts, a dropdown menu will appear in the top-right corner next to the avatar on each post. This menu allows the user to access the "Go to details" option for their own posts.
 - ![User home page](/readme.img/wire.user.lap.option.png)
 - If the user clicks on Go to details, they will be taken to a page where they can delete the image or edit its details.
 - ![delete img](/readme.img/wire.delete.imglap.png)
+
 ---
+
 - Comment
   - Like post.
   - Download post.
@@ -296,17 +321,28 @@ Create Album:
   - Like othere user's comment.
   - If you have liked any post or comment you can also unlike it by clicking on it again.
 - ![comment](/readme.img/wirer.u.dc.png)
+
 ---
+
 - Album page
 - ![album wire](/readme.img/wire.album.lap.png)
+
 ---
+
 - Settings page
 - ![Wirefram for settings page](/readme.img/Wire.setting.lap.png)
 
 ---
+
+- Edit Post
+- Should not leave any blank fields.
+- ![Edit](/readme.img/wire.Edit.png)
+
+---
+
 ## Manual test
 
-### Navbar
+### Nav-bar
 
 | Tasks                                                                                                               | Yes | No  |
 | ------------------------------------------------------------------------------------------------------------------- | --- | --- |
@@ -321,8 +357,6 @@ Create Album:
 
 ---
 
----
-
 ### Search field
 
 | Tasks                                                                       | Yes | No  |
@@ -332,9 +366,7 @@ Create Album:
 
 ---
 
----
-
-### Home Page.
+### Home page.
 
 | Tasks                                                                        | Yes | No  |
 | ---------------------------------------------------------------------------- | --- | --- |
@@ -351,8 +383,6 @@ Create Album:
 
 ---
 
----
-
 ### Register page
 
 | Tasks                                                                     | Yes | No  |
@@ -366,9 +396,7 @@ Create Album:
 
 ---
 
----
-
-### Login page
+### Login
 
 | Tasks                                              | Yes | No  |
 | -------------------------------------------------- | --- | --- |
@@ -376,8 +404,6 @@ Create Album:
 | Form shouldnt be blank.                            | x   |     |
 | You have sign, and taken to your posts page.       | x   |     |
 | After login, the user name displays in the navbar. | x   |     |
-
----
 
 ---
 
@@ -394,8 +420,6 @@ Create Album:
 
 ---
 
----
-
 ### Albums
 
 | Tasks                                                                                             | Yes | No  |
@@ -405,3 +429,61 @@ Create Album:
 | A form field will be displayed to name your album, along with a button to create it.              | x   |     |
 | After creating an album, you can edit or delete it as needed.                                     | x   |     |
 | For every action performed, the appropriate message will be displayed in the bottom-right corner. | x   |     |
+
+---
+
+## Validation
+
+- I tested all my pages through this site <https://jigsaw.w3.org/css-validator/#validate_by_uri> and result was
+  **Document checking completed. No errors or warnings to show.**
+
+---
+
+## Technologies Used
+
+- Core Technologies:
+  - React (v18.2.0): JavaScript library for building user interfaces.
+  - React DOM (v18.3.1): Renders React components into the DOM.
+  - React Scripts (v5.0.1): Configuration and build scripts from Create React App
+- Styling & UI:
+  - Bootstrap (v5.3.3): Responsive design and consistent styling.
+  - Custom CSS.
+- React Router DOM (v6.28.1): Enables dynamic client-side routing.
+- State Management & Utilities:
+  - Zustand (v5.0.2): Lightweight state management.
+  - Axios (v1.7.9): Handles HTTP requests with a global axiosInstance.
+  - JWT Decode (v3.1.2): Decodes JSON Web Tokens for authentication.
+  - Date-fns (v4.1.0) & Date-fns-tz (v3.2.0): Date and timezone utilities.
+- Head Management & Notifications:
+  - React Helmet Async (v2.0.5): Manages document head elements.
+  - React Toastify (v11.0.2): Displays toast notifications.
+- Heroku: Application deployment platform.
+
+---
+
+## Deployment
+
+- Deploy the react project to heroku.
+  - Create new file name (Procfile) in the root-directory.
+    - Add <web: serve -s build> in the file.
+  - Package.json file
+    - In the scripts section add "heroku-prebuild": "npm install -g serve"
+
+#### Heroku
+
+1.  Create an account and log in to Heroku.
+2.  Create a new app and select your preferred region.
+3.  Settings:
+
+- Navigate to the Settings tab of your app.
+- Under Config Vars, add any global environment variables (e.g., API keys, URLs).
+
+4.  Deploy:
+    - Navigate to the Deploy tab of your app.
+    - Select (connect to GitHub).
+5.  Search for your repository in the search field and connect it.
+6.  Deploy branch:
+
+- Click Deploy Branch to start the deployment process.
+
+---

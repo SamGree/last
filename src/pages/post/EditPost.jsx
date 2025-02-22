@@ -32,7 +32,7 @@ const EditPost = () => {
         setTags(post.tags.join(", "));
         setPreview(post.image);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         toast.error("Error while fetching post details!");
       } finally {
         setFetchingPost(false);
@@ -105,7 +105,7 @@ const EditPost = () => {
         toast.error("Failed to update post!");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Error while updating post!");
     } finally {
       setLoading(false);
