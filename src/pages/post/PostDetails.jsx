@@ -24,7 +24,6 @@ const PostDetails = () => {
     addComment,
     setPost,
     post,
-    // deletePost,
   } = usePostStore();
   const { albums } = useAlbums();
   const [comment, setComment] = useState("");

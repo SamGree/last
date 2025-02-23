@@ -15,8 +15,6 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 ---
 
-global helmet
-
 ## Table of Contents
 
 ---
@@ -32,6 +30,7 @@ global helmet
   - [Liked Posts](#liked-posts)
   - [Settings Page](#settings-page)
   - [Logged out](#logged-out)
+- [Accessibility & UX Considerations](#accessibility--ux-considerations)  
 - [Design](#design)
   - [Wireframes section](#wireframes-section)
 - [Manual test](#manual-test)
@@ -43,10 +42,11 @@ global helmet
   - [Add Post page.](#add-post-page-1)
   - [Albums](#albums)
 - [Validation](#validation)
+- [Lighthouse](#lighthouse)
 - [Technologies Used](#technologies-used)
 - [Deployment](#deployment)
   - [Heroku](#heroku)
-- []()
+- [Bugs](#bugs)
 
 ---
 
@@ -242,6 +242,9 @@ Create Album:
 - ![toaster2](/readme.img/toaster2.png) .![toaster3](/readme.img/toaster3.png)
 
 ---
+## Accessibility & UX Considerations:
+- This application follows accessibility guidelines by using semantic HTML, providing alt text for images, ensuring keyboard navigability, and maintaining sufficient color contrast. The user interface is designed for ease of use with clear navigation, intuitive interactions, and responsive design.
+---
 
 ## Design
 
@@ -371,11 +374,11 @@ Create Album:
 | Tasks                                                                        | Yes | No  |
 | ---------------------------------------------------------------------------- | --- | --- |
 | Page loads.                                                                  | x   |     |
-| post feed has (hart ican,comment icon, and download ican).                   | x   |     |
+| post feed has (heart ican,comment icon, and download ican).                   | x   |     |
 | If you are not login, you will be able to see the posts only.                | x   |     |
 | If you are login, you can like, comment, add post and so on.                 | x   |     |
-| Click on hart icon(like the post)count is incremented +1 .                   | x   |     |
-| Click again on hart icon same post unlike count is decremented -1 .          | x   |     |
+| Click on heart icon(like the post)count is incremented +1 .                   | x   |     |
+| Click again on heart icon same post unlike count is decremented -1 .          | x   |     |
 | Click on comment icon, it will take you to the post detail view.             | x   |     |
 | Click on download icon, the post will download and count is incremented +1 . | x   |     |
 | If you click on your owne avatar image you get dropbar(go to details).       | x   |     |
@@ -436,7 +439,9 @@ Create Album:
 
 - I tested all my pages through this site <https://jigsaw.w3.org/css-validator/#validate_by_uri> and result was
   **Document checking completed. No errors or warnings to show.**
-
+---
+### Lighthouse
+- ![lighthouse](/readme.img/light.house.png)
 ---
 
 ## Technologies Used
@@ -486,4 +491,12 @@ Create Album:
 
 - Click Deploy Branch to start the deployment process.
 
+---
+## Bugs
+- Postdetails file:
+I had error in the console while deleting posts; it was successful but still was showing error because I had duplicate line of code and delete unnecessary one. The error was gone.
+- ![postdetail](/readme.img/bug.postdetail.png)
+---
+- Bug History & Challenges:
+   - While working on the application, I encountered several bugs during development. Unfortunately, due to technical issues with my laptop, I was unable to save the records of those bugs. As a result, I had to restart the application from scratch, which was challenging but also provided valuable learning opportunities.
 ---
