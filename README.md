@@ -7,11 +7,11 @@
 
 ## Introduction
 
-E-pics is a platform designed for photo enthusiasts who want to share their images with others. Users can not only upload their own photos but also download any images available on the site.
+- E-pics is a platform designed for photo enthusiasts who want to share their images with others. Users can not only upload their own photos but also download any images available on the site.
 
-The goal is to foster a vibrant sharing community where you can either contribute by uploading your photos or simply browse and appreciate the creations of others.
+- The goal is to foster a vibrant sharing community where you can either contribute by uploading your photos or simply browse and appreciate the creations of others.
 
-Additionally, you can connect with the community by leaving comments, giving likes, or organizing your favorite posts into private albums for easy access.
+- Additionally, you can connect with the community by leaving comments, giving likes, or organizing your favorite posts into private albums for easy access.
 
 ---
 
@@ -21,6 +21,8 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 - [User Profiles](#user-profiles)
 - [User Goals](#user-goals)
+- [Design](#design)
+  - [Wireframes section](#wireframes-section)
 - [Features](#features)
   - [Home Page](#home-page)
   - [Registration Page](#registration-page)
@@ -31,8 +33,7 @@ Additionally, you can connect with the community by leaving comments, giving lik
   - [Settings Page](#settings-page)
   - [Logged out](#logged-out)
 - [Accessibility & UX Considerations](#accessibility--ux-considerations)  
-- [Design](#design)
-  - [Wireframes section](#wireframes-section)
+
 - [Manual test](#manual-test)
   - [Nav-bar](#nav-bar)
   - [Search field](#search-field)
@@ -52,31 +53,125 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 ## User Profiles
 
-- The casual user finds joy in browsing through captivating photos as a way to unwind and draw inspiration. They appreciate discovering fresh photography styles and occasionally download images for personal use. The convenience of saving their favorite photos into albums for easy access later is something they highly value.The amateur photographer enjoys sharing their work with others to gather feedback.
-  They find satisfaction in observing how their creations are received and take pride in contributing to a creative community. The platform makes it simple for them to upload their work and gain exposure.
-  Being able to organize their own content and explore others' creations in albums is a significant perk.
-  The enthusiast loves collecting and organizing photos. They take pleasure in curating their collections,
-  showcasing them to family and friends. A seamless process for adding albums and posts is essential,
-  as they frequently log in to explore, download, and refine their private collections.
+- The casual user finds joy in browsing through captivating photos as a way to unwind and draw inspiration. They appreciate discovering fresh photography styles and occasionally download images for personal use. 
+- The convenience of saving their favorite photos into albums for easy access later is something they highly value.The amateur photographer enjoys sharing their work with others to gather feedback.
+- They find satisfaction in observing how their creations are received and take pride in contributing to a creative community.
+- The platform makes it simple for them to upload their work and gain exposure. Being able to organize their own content and explore others' creations in albums is a significant perk.
+- The enthusiast loves collecting and organizing photos. They take pleasure in curating their collections,
+  showcasing them to family and friends.
+- A seamless process for adding albums and posts is essential, as they frequently log in to explore, download, and refine their private collections.
 
 ---
 
 ### User Goals
 
-- The Casual User
-  These users want to discover new photography styles and trends.
+- The Casual User these users want to discover new photography styles and trends.
   They enjoy scrolling as a relaxing activity.
-  The Amateur Photographer
-  This group uses the platform to share their photos and connect with the community.They appreciate feedback through likes, comments, and download counts.The platform helps them gain exposure for their work. The Enthusiast
-  Enthusiasts love finding and collecting beautiful images.
-  They take pride in curating albums of amazing pieces.
-  Website Owner Goals The owner’s goal is to increase website traffic.More users mean they can add features to improve the experience for current users and attract new ones.
-  This could lead to more ad revenue and potential subscription options.
-  New features must be carefully chosen to keep existing users happy.
-  The site needs to work well on both mobile and larger screens for easy use.
+- The Amateur Photographer:
+  This group uses the platform to share their photos and connect with the community.They appreciate feedback through likes, comments, and download counts.
+- The platform helps them gain exposure for their work. The - Enthusiast:
+Enthusiasts love finding and collecting beautiful images.
+They take pride in curating albums of amazing pieces.
+Website Owner Goals The owner’s goal is to increase website traffic.More users mean they can add features to improve the experience for current users and attract new ones.
+- This could lead to more ad revenue and potential subscription options.
+- New features must be carefully chosen to keep existing users happy.
+The site needs to work well on both mobile and larger screens for easy use.
+
+---
+## Design
+
+### Wireframes section
+
+- Mobile and iPad versions will share the same structure.
+- Home page wireframe.
+- ![Mobile](/readme.img/wireframes.mobile.png) ![navbar](/readme.img/navbar.drop.png)
 
 ---
 
+- Login and register page wireframe
+- ![login](/readme.img/login.page.wireframes.png)![register](/readme.img/registerpage.wirefram.png)
+
+---
+
+- User when logged in.
+- ![logged in wirefram](/readme.img/wire.loggedin.png)
+
+---
+
+- Album
+- ![albumpagewire](/readme.img/wire.album.png)
+
+---
+
+- liked posts page
+- ![wirelikedposts](/readme.img/wire.liked.p.png)
+
+---
+
+- Add new posts
+- ![wirenewpost](/readme.img/wire.add.new.post.png)
+
+---
+
+- Setting page
+- ![wiresettings](/readme.img/wire.settings.png)
+
+---
+
+- Laptop and desktop versions will share the same structure.
+- Home
+- ![wirelaphome](/readme.img/wire.laptop.home.png)
+
+---
+
+- Register
+- ![wire.lap.register](/readme.img/wire.lap.register.png)
+
+---
+
+- Login
+- ![wire.lap.login](/readme.img/wire.lap.login.png)
+
+---
+
+- User page
+- ![user page](/readme.img/wire.lap.userpage.png)
+
+---
+
+- User home page
+- While logged in, if a user has added posts, a dropdown menu will appear in the top-right corner next to the avatar on each post. This menu allows the user to access the "Go to details" option for their own posts.
+- ![User home page](/readme.img/wire.user.lap.option.png)
+- If the user clicks on Go to details, they will be taken to a page where they can delete the image or edit its details.
+- ![delete img](/readme.img/wire.delete.imglap.png)
+
+---
+
+- Comment
+  - Like post.
+  - Download post.
+  - Add post to album.
+  - write a comment. Edit or delete your comment.
+  - Like othere user's comment.
+  - If you have liked any post or comment you can also unlike it by clicking on it again.
+- ![comment](/readme.img/wirer.u.dc.png)
+
+---
+
+- Album page
+- ![album wire](/readme.img/wire.album.lap.png)
+
+---
+
+- Settings page
+- ![Wirefram for settings page](/readme.img/Wire.setting.lap.png)
+
+---
+
+- Edit Post
+- Should not leave any blank fields.
+- ![Edit](/readme.img/wire.Edit.png)
+---
 ## Features
 
 ### Home Page
@@ -85,7 +180,8 @@ Additionally, you can connect with the community by leaving comments, giving lik
 - Navigation Bar:
   Includes options to navigate to the Home, Login, and Register pages for quick access.
 - ![Nav__bar](/readme.img/navigation%20bar.png)
-
+- The "E-Pics" text, located on the top-left corner of the navigation bar.It is clickable and serves as a home button, allowing users to quickly return to the homepage from anywhere on the site.
+- ![clickable](/readme.img/topright.png)
 ---
 
 ### Registration Page
@@ -127,7 +223,7 @@ Additionally, you can connect with the community by leaving comments, giving lik
 
 - Post Actions: Like Button: Allows users to like a post, with a heart icon will turn _red_ and the count of likes displayed. If you unlike the post the heard icon will turn black.
 - If you like a post, the heart icon will turn red and remain red as long as you're signed in. When you sign out, the heart icon will appear gray for every post. However, when you sign back in, any posts you've previously liked will automatically display a red heart again, otherwise heart will display black when you are sig in.
-- ![redheart](/readme.img/redheart.png)
+- ![redheart](/readme.img/like.botton.png)
 - Comment Button: Enables users to comment on the post, with the count of comments displayed.
 - Download Button: Provides an option to download the post content, with the download count displayed and valid date is associated with the post.
 - ![postaction](/readme.img/postactions.png)
@@ -248,100 +344,7 @@ Create Album:
 - This application follows accessibility guidelines by using semantic HTML, providing alt text for images, ensuring keyboard navigability, and maintaining sufficient color contrast. The user interface is designed for ease of use with clear navigation, intuitive interactions, and responsive design.
 ---
 
-## Design
 
-### Wireframes section
-
-- Mobile and iPad versions will share the same structure.
-- Home page wireframe.
-- ![Mobile](/readme.img/wireframes.mobile.png) ![navbar](/readme.img/navbar.drop.png)
-
----
-
-- Login and register page wireframe
-- ![login](/readme.img/login.page.wireframes.png)
-- ![register](/readme.img/registerpage.wirefram.png)
-
----
-
-- User when logged in.
-- ![logged in wirefram](/readme.img/wire.loggedin.png)
-
----
-
-- Album
-- ![albumpagewire](/readme.img/wire.album.png)
-
----
-
-- liked posts page
-- ![wirelikedposts](/readme.img/wire.liked.p.png)
-
----
-
-- Add new posts
-- ![wirenewpost](/readme.img/wire.add.new.post.png)
-
----
-
-- Setting page
-- ![wiresettings](/readme.img/wire.settings.png)
-
----
-
-- Laptop and desktop versions will share the same structure.
-- Home
-- ![wirelaphome](/readme.img/wire.laptop.home.png)
-
----
-
-- Register
-- ![wire.lap.register](/readme.img/wire.lap.register.png)
-
----
-
-- Login
-- ![wire.lap.login](/readme.img/wire.lap.login.png)
-
----
-
-- User page
-- ![user page](/readme.img/wire.lap.userpage.png)
-
----
-
-- User home page
-- While logged in, if a user has added posts, a dropdown menu will appear in the top-right corner next to the avatar on each post. This menu allows the user to access the "Go to details" option for their own posts.
-- ![User home page](/readme.img/wire.user.lap.option.png)
-- If the user clicks on Go to details, they will be taken to a page where they can delete the image or edit its details.
-- ![delete img](/readme.img/wire.delete.imglap.png)
-
----
-
-- Comment
-  - Like post.
-  - Download post.
-  - Add post to album.
-  - write a comment. Edit or delete your comment.
-  - Like othere user's comment.
-  - If you have liked any post or comment you can also unlike it by clicking on it again.
-- ![comment](/readme.img/wirer.u.dc.png)
-
----
-
-- Album page
-- ![album wire](/readme.img/wire.album.lap.png)
-
----
-
-- Settings page
-- ![Wirefram for settings page](/readme.img/Wire.setting.lap.png)
-
----
-
-- Edit Post
-- Should not leave any blank fields.
-- ![Edit](/readme.img/wire.Edit.png)
 
 ---
 
@@ -353,9 +356,9 @@ Create Album:
 | ------------------------------------------------------------------------------------------------------------------- | --- | --- |
 | Click on E-pics home page load.                                                                                     | x   |     |
 | Click on home icon, home page load.                                                                                 | x   |     |
-| Click on login, forrm login page load.                                                                              | x   |     |
+| Click on login, form login page load.                                                                              | x   |     |
 | Click on register, form register page load.                                                                         | x   |     |
-| On smaller screen navbar turn to hamburger ican.                                                                    | x   |     |
+| On smaller screen navbar turn to hamburger icon.                                                                    | x   |     |
 | click on hamburger icon it will expand.                                                                             | x   |     |
 | Hamburger icon expands shows(Home, loin, register) before login.                                                    | x   |     |
 | Hamburger icon after login shows(home, user name,logout, then inside arrow\*add post, like posts, album, settings). | x   |     |
