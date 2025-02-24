@@ -97,7 +97,9 @@ Additionally, you can connect with the community by leaving comments, giving lik
   - Upload Avatar: Users can upload an image file to set as their profile avatar.
   - Register button to submit their information and create an account.
 - ![Registration](/readme.img/registerpage.png)
-
+- Register Button Behavior:
+   - 🟪 Light Purple: Indicates that the form is incomplete (e.g., the username field is empty), and the button is disabled unclickable.
+   - 🟣 darker Purple: Indicates that the form is correctly filled out, and the button is active and ready to submit.
 ---
 
 ### Login page
