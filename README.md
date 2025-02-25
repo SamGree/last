@@ -506,3 +506,8 @@ I had error in the console while deleting posts; it was successful but still was
 - Bug History & Challenges:
    - While working on the application, I encountered several bugs during development. Unfortunately, due to technical issues with my laptop, I was unable to save the records of those bugs. As a result, I had to restart the application from scratch, which was challenging but also provided valuable learning opportunities.
 ---
+## Credits
+- 
+-
+- Inspiration_
+  - The design and layout of the front-end were inspired by a similar website I came across  [- ( Snaps ) -](https://snaps-frontend-871b3764ee9c.herokuapp.com/). No code was copied; I only used it as a reference for the visual structure and user experience.
