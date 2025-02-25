@@ -52,15 +52,20 @@ const Register = () => {
   }, [formData.password, formData.password_again]);
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+  const { name, value, files } = e.target;
 
-    if (name === "username") {
-      if (value.length > 15) {
-        setUsernameError("Username cannot exceed 15 characters.");
-      } else {
-        setUsernameError("");
-      }
+  if (name === "username") {
+    // ✅ NEW: Added regex validation to allow only letters
+    const lettersOnlyRegex = /^[A-Za-z]*$/;
+
+    if (!lettersOnlyRegex.test(value)) {
+      setUsernameError("Username can only contain letters (A-Z, a-z).");
+    } else if (value.length > 15) {
+      setUsernameError("Username cannot exceed 15 characters.");
+    } else {
+      setUsernameError(""); // ✅ Clear error if valid
     }
+  }
 
     if (files) {
       const file = files[0];

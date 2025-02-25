@@ -248,6 +248,7 @@ The site needs to work well on both mobile and larger screens for easy use.
 ---
 
 - Select post to album
+- If you don't have an album, you need to create one first in album page.
 - Users can add posts to albums.
 - ![select album](/readme.img/selecalbum.png)
 
