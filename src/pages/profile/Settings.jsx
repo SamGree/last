@@ -68,7 +68,7 @@ const Settings = () => {
       setUser(updatedUser);
       toast.success("Profile is successfully updated.");
     } catch (error) {
-      // console.log(error);
+      
       toast.error("Error while updating user profile!");
     }
   };

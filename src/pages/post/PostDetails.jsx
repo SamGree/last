@@ -35,7 +35,7 @@ const PostDetails = () => {
 
   useEffect(() => {
     posts.map((post) => {
-      // console.log("post before ", post);
+      
       likedPosts &&
         likedPosts.forEach((likedPost) => {
           if (likedPost.id === post.id) {
@@ -53,7 +53,7 @@ const PostDetails = () => {
         setPost(data.post);
         setComments(data.comments);
       } catch (error) {
-        // console.log(error);
+        
         toast.error("Error while fetching post details!");
       } finally {
         setFetchingPost(false);
@@ -81,7 +81,7 @@ const PostDetails = () => {
           });
         }
       } catch (error) {
-        //console.log(error);
+        
         toast.error("Error while fetching post details!");
       }
     };
@@ -160,7 +160,7 @@ const PostDetails = () => {
       setComment("");
       toast.success("Comment submitted successfully!");
     } catch (error) {
-      // console.log(error);
+      
       toast.error("Error while submitting comment!");
     } finally {
       setLoading(false);
@@ -180,11 +180,10 @@ const PostDetails = () => {
         },
       });
       removePost(post.postId);
-      // deletePost(postId);
       toast.success("Post deleted successfully!");
       navigate("/");
     } catch (error) {
-      // console.log(error);
+      
       toast.error("Error while deleting post!");
     } finally {
       setShowDeleteModal(false);

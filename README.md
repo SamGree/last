@@ -187,7 +187,7 @@ The site needs to work well on both mobile and larger screens for easy use.
 ### Registration Page
 
 - The Registration Page allows new users to create an account by providing their credentials and uploading a profile avatar.
-  - Username: Users can enter their desired username. Username cannot exceed 15 characters.The username field must be unique.
+  - Username: Users can enter their desired username. Username cannot exceed 15 letters.The username field must be unique.
   - Password: Users can input their password for account security. Password must have at least 8 characters.
   - Confirm Password: Users must re-enter their password to ensure it matches.
   - Upload Avatar: Users can upload an image file to set as their profile avatar.

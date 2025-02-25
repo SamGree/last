@@ -17,7 +17,7 @@ const PostsLiked = () => {
           headers: { Authorization: `Token ${token}` },
         });
         setPosts(data || []);
-        // console.log("data= ", data);
+      
       } catch (error) {
         console.error(error);
         toast.error("Error while fetching liked posts!");
