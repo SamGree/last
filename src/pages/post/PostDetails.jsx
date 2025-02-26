@@ -76,7 +76,7 @@ const PostDetails = () => {
 
         if (data && data.length > 0) {
           data.map((liked_Post) => {
-            if (liked_Post.id === postId) setPost(liked_Post);
+            if (liked_Post.id == postId) setPost(liked_Post);
             return;
           });
         }
