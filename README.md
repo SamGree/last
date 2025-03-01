@@ -2,11 +2,10 @@
 
 - ![am i responsive](/readme.img/ami.png)
 - live link - [last-epics](https://last-epics-76629a697a31.herokuapp.com/)
-   - The name Last Epics was chosen to represent a space where users can share and preserve their most meaningful and extraordinary moments. 'Epics' symbolizes grand and memorable stories, while 'Last' reflects timelessness, ensuring that these shared experiences remain accessible and celebrated. Whether it's a breathtaking photograph, a heartfelt story, or a special memory, Last Epics is a digital archive where every post tells a story worth remembering
+   - The name Last Epics was chosen to represent a space where users can share and preserve their most meaningful and extraordinary moments. 'Epics' symbolizes grand and memorable stories, while 'Last' reflects timelessness, ensuring that these shared experiences remain accessible and celebrated. Whether it's a breathtaking photograph, a heartfelt story, or a special memory, Last Epics is a digital archive where every post tells a story worth remembering.
 ---
 
 ## Introduction
-
 - E-pics is a platform designed for photo enthusiasts who want to share their images with others. Users can not only upload their own photos but also download any images available on the site.
 
 - The goal is to foster a vibrant sharing community where you can either contribute by uploading your photos or simply browse and appreciate the creations of others.
@@ -14,11 +13,7 @@
 - Additionally, you can connect with the community by leaving comments, giving likes, or organizing your favorite posts into private albums for easy access.
 
 ---
-
 ## Table of Contents
-
----
-
 - [User Profiles](#user-profiles)
 - [User Goals](#user-goals)
 - [Design](#design)
@@ -48,7 +43,7 @@
 - [Deployment](#deployment)
   - [Heroku](#heroku)
 - [Bugs](#bugs)
-
+- [Credits](#credits)
 ---
 
 ## User Profiles
@@ -233,7 +228,7 @@ The site needs to work well on both mobile and larger screens for easy use.
 - Pagination: Pagination controls allow users to navigate through posts, displaying items per page (default is 5).
 - Navigation includes:
   - Items per page dropdown.
-  - Buttons for "First", "Previous", "Next", and "Last" pages.
+  - Buttons for "First", " < ", "Next", and " > " pages.
 - ![pagination](/readme.img/pagination.png)
 
 ---
