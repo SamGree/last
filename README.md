@@ -2,7 +2,7 @@
 
 - ![am i responsive](/readme.img/ami.png)
 - live link - [last-epics](https://last-epics-76629a697a31.herokuapp.com/)
-
+   - The name Last Epics was chosen to represent a space where users can share and preserve their most meaningful and extraordinary moments. 'Epics' symbolizes grand and memorable stories, while 'Last' reflects timelessness, ensuring that these shared experiences remain accessible and celebrated. Whether it's a breathtaking photograph, a heartfelt story, or a special memory, Last Epics is a digital archive where every post tells a story worth remembering
 ---
 
 ## Introduction
