@@ -1,7 +1,7 @@
 # E-pics
 
 - ![am i responsive](/readme.img/ami.png)
-- live link - [E-pics](https://last-epics-76629a697a31.herokuapp.com/)
+- live link - [last-epics](https://last-epics-76629a697a31.herokuapp.com/)
 
 ---
 
