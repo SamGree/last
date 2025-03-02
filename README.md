@@ -80,7 +80,7 @@ The site needs to work well on both mobile and larger screens for easy use.
 - Mobile and iPad versions will share the same structure.
 - Home page wireframe.
 - ![Mobile](/readme.img/wireframes.mobile.png) ![navbar](/readme.img/navbar.drop.png)
-- On mobile and iPad devices, clicking the hamburger icon opens the navigation menu, allowing users to access options such as Add Post, Liked Posts, Albums, and Settings. The menu remains open for easy navigation, and users should click the hamburger icon again to close it it want it.
+- On mobile and iPad devices, clicking the hamburger icon opens the navigation menu, allowing users to access options such as Add Post, Liked Posts, Albums, and Settings. The menu remains open for easy navigation, and users should click the hamburger icon again to close it if user want it.
 ---
 
 - Login and register page wireframe
