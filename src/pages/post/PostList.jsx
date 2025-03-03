@@ -18,8 +18,9 @@ const PostList = ({ posts }) => {
             post.is_liked = true;
           }
         });
+        return null;
     });
-  }, [posts]);
+  }, [posts, likedPosts]);
 
   const renderTooltip = (props, username) => (
     <Tooltip {...props}>{username}</Tooltip>

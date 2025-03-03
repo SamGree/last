@@ -8,6 +8,7 @@ import { formatDate } from "../utils/helper-functions";
 import { toast } from "react-toastify";
 import useLikedPostsStore from "../store/liked-post-store";
 
+
 const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
   const { toggleLike } = useToggleLike();
   const { downloadImage } = useDownloadImage();
@@ -19,14 +20,14 @@ const CardDetails = ({ post, handleEdit, setShowDeleteModal }) => {
 
   useEffect(() => {
     if (likedPosts && likedPosts.length > 0) {
-      likedPosts.forEach((talal) => {
-        if (talal.id == post.id) {
+      likedPosts.forEach(likedpost => {
+        if (likedpost.id === +post.id) {
           post.is_liked = true;
           setUpdatedPost(post);
         }
       });
     }
-  }, [post]);
+  }, [post, likedPosts]);
 
   const handleOnToggleLike = async (id) => {
     setIsLiking(true);

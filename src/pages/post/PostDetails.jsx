@@ -42,6 +42,7 @@ const PostDetails = () => {
             post.is_liked = true;
           }
         });
+        return null;
     });
   }, [posts, likedPosts]);
 
@@ -76,8 +77,8 @@ const PostDetails = () => {
 
         if (data && data.length > 0) {
           data.map((liked_Post) => {
-            if (liked_Post.id == postId) setPost(liked_Post);
-            return;
+            if (+liked_Post.id === +postId) setPost(liked_Post);
+            return null;
           });
         }
       } catch (error) {

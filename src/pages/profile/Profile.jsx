@@ -10,7 +10,7 @@ const Profile = () => {
   const { user, token, getAuthHeaders } = useAuthStore(); // Fetch token & auth headers
   const { sendRequest } = useHttpRequest();
   const { posts, setPosts, updatePosts } = usePostStore();
-  const { likedPosts, setLikedPosts } = useLikedPostsStore();
+  const { setLikedPosts } = useLikedPostsStore();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -55,7 +55,7 @@ const Profile = () => {
     };
 
     fetchLikedPost();
-  }, [sendRequest, user.id, token, setPosts, setLikedPosts, getAuthHeaders]); // Added getAuthHeaders to dependencies
+  }, [sendRequest, user, user.id, token, setPosts, setLikedPosts, getAuthHeaders]); // Added getAuthHeaders to dependencies
 
   // Get CSRF Token (For Django CSRF protection)
   const getCsrfToken = () => {
