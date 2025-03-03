@@ -8,10 +8,8 @@ const useToggleLike = () => {
   const { sendRequest } = useHttpRequest();
   const { token, user } = useAuthStore();
   const {
-    setComments,
     posts,
     getCommentsByPostId,
-    setPosts,
     updatePosts,
     setPost,
     updateComments,
@@ -124,7 +122,7 @@ const useToggleLike = () => {
           if (!response.is_liked) {
             setLikedPosts(
               likedPosts.filter(
-                (liked_Post) => liked_Post.id != response.post_id
+                (liked_Post) => +liked_Post.id !== +response.post_id 
               )
             );
           } else {
