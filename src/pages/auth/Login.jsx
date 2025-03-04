@@ -60,6 +60,10 @@ const Login = () => {
             },
             { username, password }
           );
+          if (data.error && data.error.includes("username")) { 
+            toast.error("Invalid username!"); // Added toast for invalid username
+            return;
+          }
           setUser(data.user);
           setToken(data.token);
           toast.success("Login was successfull.");
