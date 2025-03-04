@@ -440,6 +440,8 @@ Create Album:
 
 - I tested all my pages through this site <https://jigsaw.w3.org/css-validator/#validate_by_uri> and result was
   **Document checking completed. No errors or warnings to show.**
+- I have validated all my JavaScript and JSX files using ESLint, and no errors were found.
+- I have validated all my CSS files using the W3C Jigsaw Validator, and no errors were found.
 ---
 ### Lighthouse
 - ![lighthouse](/readme.img/light.house.png)
