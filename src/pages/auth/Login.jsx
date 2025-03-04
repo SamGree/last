@@ -60,8 +60,14 @@ const Login = () => {
             },
             { username, password }
           );
-          if (data.error && data.error.includes("username")) { 
-            toast.error("Invalid username!"); // Added toast for invalid username
+          if (data.error) {
+            if (data.error.toLowerCase().includes("username")) {
+              toast.error("Invalid username!"); // Show toast for invalid username
+            } else if (data.error.toLowerCase().includes("password")) {
+              toast.error("Incorrect password!"); // Show toast for incorrect password
+            } else {
+              toast.error(data.error); // Show any other error from the API
+            }
             return;
           }
           setUser(data.user);
